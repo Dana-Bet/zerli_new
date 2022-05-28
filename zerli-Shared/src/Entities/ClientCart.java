@@ -130,7 +130,7 @@ public class ClientCart {
 	    		  recipt.append("#");
 	    	  }
 	    	 float totalPrice = this.OrderTotalPrice();
-	    	 recipt.append("Total price = "+totalPrice);
+	    	 recipt.append("Total price = "+totalPrice+"$");
 	    	 recipt.append("#");
              this.Recipt= recipt.toString();
 	      }

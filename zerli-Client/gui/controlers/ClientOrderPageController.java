@@ -109,7 +109,7 @@ public class ClientOrderPageController  extends AbstractController implements In
     void ToPayScreen(ActionEvent event) throws IOException {
     	setTime();
     	if(checkAllFileds()!=1) {return;}
-    	if(this.IsDelivery) {
+    	if(delivery!=null) {
     		ClientOrderPageController.TotalPrice +=this.delivery_price;
     		addDetailsToRecipt.append("Extra "+this.delivery_price+"$ shipping #");
     	}
@@ -270,7 +270,21 @@ public class ClientOrderPageController  extends AbstractController implements In
      
 	@Override
 	public void display(String string) {
-	
+	       if(ClientOrderPageController.order!=null) {
+	    	   this.UpLbl.setText("Please choose new time for suppliement");
+	    	   this.shopDropDownMenu.setValue(order.getStore());
+	    	   if(order.getDelivery()!=null) {
+	    		   this.DeliveryMethodChoice.setValue("delivery");
+	    		   this.CityTextFiled.setText(order.delivery.getCity());
+	       	       this.AddressTextFiled.setText(order.delivery.getAddress());
+	       	       this.ReciverPhoneText.setText(order.delivery.getPhone());
+	       	       this.ReciverNameText.setText(order.delivery.getReciverName());
+	       	       this.deliveryPrice.setText("Extra "+this.delivery_price+"$ shipping");
+	    	   }
+	    	   else {
+	    		   this.DeliveryMethodChoice.setValue("pick up");
+	    	   }
+	       }
 	}
 	
 
