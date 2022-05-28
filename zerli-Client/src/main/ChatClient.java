@@ -26,7 +26,7 @@ public class ChatClient extends AbstractClient
 		chatClient = this;
 		openConnection();
 	}
-
+//
   public void handleMessageFromServer(Object msg) {
 	System.out.println("--> get message from server");
 	if (msg instanceof Message) {
