@@ -2,6 +2,7 @@ package Entities;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 
 public class Order implements Serializable{
@@ -18,13 +19,13 @@ public class Order implements Serializable{
 
 	public String suppTime = null;
 	public String suppDate = null;
-	public Time orderTime=null;
+	public Timestamp orderTime=null;
 
 	public Delivery delivery =null;
 
 
 	public Order(int OrderNumber,String store,String greetingCard,String Status,
-			String price,String suppmethod,String suppTime,String suppDate,Time OrderTime)
+			String price,String suppmethod,String suppTime,String suppDate,Timestamp timestamp)
 	{
 		this.orderNumber = OrderNumber;
 		this.price = price;
@@ -34,7 +35,7 @@ public class Order implements Serializable{
 		this.store = store;
 		this.suppDate = suppDate;
 		this.suppTime = suppTime;
-		this.orderTime = OrderTime;
+		this.orderTime = timestamp;
 	}
 	
 	
@@ -125,11 +126,11 @@ public class Order implements Serializable{
 	}
 	
 	
-	public Time getOrderTime() {
+	public Timestamp getOrderTime() {
 		return orderTime;
 	}
 	
-	public void setOrderTime(Time orderTime) {
+	public void setOrderTime(Timestamp orderTime) {
 		this.orderTime = orderTime;
 	}
 		

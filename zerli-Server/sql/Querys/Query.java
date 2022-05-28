@@ -543,7 +543,7 @@ public class Query {
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
 					orders.add(new Order(rs.getInt("OrderNum"),rs.getString("store"),rs.getString("greeting"),rs.getString("status"),rs.getString("price"),
-							rs.getString("supplimentMethod"),rs.getString("supplimentTime"),rs.getString("supplimentDate"),rs.getTime("OrderTime")));
+							rs.getString("supplimentMethod"),rs.getString("supplimentTime"),rs.getString("supplimentDate"),rs.getTimestamp("OrderTime")));
 				}
 				
 				rs.close();
