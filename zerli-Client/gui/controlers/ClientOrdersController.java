@@ -3,10 +3,13 @@ package controlers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import Entities.LineInCartTable;
 import Entities.Message;
 import Entities.MessageType;
 import Entities.Order;
@@ -16,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -25,7 +29,13 @@ import main.ClientUI;
 public class ClientOrdersController extends AbstractController implements Initializable {
 	public static ArrayList<Order> list; 
 	public static ArrayList<String> recipt=null;
-
+    private Timestamp OrderTime;
+    private String SuppDate;
+	private String SuppTime;
+    private String date;
+    private String Status;
+    public static String Refund;
+    
     @FXML
     private TableView<Order> table;
 
@@ -70,20 +80,73 @@ public class ClientOrdersController extends AbstractController implements Initia
 
     @FXML
     private Button ComplaintBtn;
+    
+    @FXML
+    private Label upLbl;
+
 
     @FXML
-    void CancelSelectedOrder(ActionEvent event) {
+    void CancelSelectedOrder(ActionEvent event) throws IOException {
+    	upLbl.setText("");
+        ObservableList<Order> list;
+        list = this.table.getSelectionModel().getSelectedItems();
+        if(list!=null) {
+        	OrderTime =list.get(0).getOrderTime();
+        	SuppDate=list.get(0).getSuppDate();
+        	SuppTime=list.get(0).getSuppTime();
+        	Status=list.get(0).getStatus();
+        	
+        	
+        			
+            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        	LocalDate localDate = LocalDate.parse(SuppDate, formatter1);
 
+        	DateTimeFormatter parser = DateTimeFormatter.ISO_LOCAL_TIME;
+        	LocalTime localTime = LocalTime.parse(SuppTime, parser);
+
+            LocalDateTime t =   LocalDateTime.of(localDate, localTime);
+        	Timestamp suppTimeOfOrder = Timestamp.valueOf(t);
+        	Timestamp currentTime = Timestamp.valueOf(LocalDateTime.now());
+            long difference_In_Time= suppTimeOfOrder.getTime() - currentTime.getTime();
+            long difference_In_Hours= (difference_In_Time/ (1000 * 60 * 60)) % 24;
+            
+            switch((int)difference_In_Hours) {
+                  case 0:{
+                	  Refund = "Not refund";
+                  }
+                  case 1:{
+                   	  Refund = "50% refund"; 
+                  }
+                  case 2:{
+                   	  Refund = "50% refund"; 
+                  }
+          		default:{
+          			Refund = "refund all"; 
+          		}
+        	}
+            
+            
+        }
+        
+        else {
+        	upLbl.setText("Please select order from the table.");
+        	return;
+        }
     }
 
     @FXML
     void DisplaySelectedOrder(ActionEvent event) {
+    	upLbl.setText("");
         ObservableList<Order> list;
         list = this.table.getSelectionModel().getSelectedItems();
         if(list!=null) {
             int OrderNum =list.get(0).getOrderNumber();
 			ClientUI.chat.accept(new Message(MessageType.getRecipt,OrderNum));
 			updateTextRecipt();
+        }
+        else {
+        	upLbl.setText("Please select order from the table.");
+        	return;
         }
     }
 
@@ -106,7 +169,7 @@ public class ClientOrdersController extends AbstractController implements Initia
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+    	this.upLbl.setText("hi");
 		ClientUI.chat.accept(new Message(MessageType.Get_All_Order_by_id,LoginScreenController.user.getId()));
 		ObservableList<Order> observableList = FXCollections.observableArrayList(list);
 		table.getItems().clear();

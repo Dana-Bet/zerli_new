@@ -253,18 +253,25 @@ public class ClientOrderPageController  extends AbstractController implements In
 	 }
 	 
 	 
-     private ArrayList<LocalTime> CreateOpeningTimeList() {
-    	 this.hourList = new ArrayList<LocalTime>();
-    	 LocalTime current = LocalTime.of(9,0,0);
-    	 int i =current.getHour();
-    	 while( i < 21)
-    	 {
-    		     hourList.add(current.plusMinutes(30));	
-    			 hourList.add(current.plusHours(1));	 
-    			 i++;
-    			 current = LocalTime.of(i,0,0);
+     private ArrayList<String> CreateOpeningTimeList() {
+    	 ArrayList<String> hours = new ArrayList<String>();
+    	 hours.add("09:00 AM");
+    	 hours.add("09:30 AM");
+    	 int i=10;
+    	 while(i<12) {
+    		 hours.add(i+":00 AM");
+    		 hours.add(i+":30 AM");
+    		 i++;
     	 }
-		return hourList;
+    	 hours.add("12:00 PM");
+    	 hours.add("12:30 PM");
+    	 i=1;
+    	 while(i<=8) {
+    		 hours.add("0"+i+":00 PM");
+    		 hours.add("0"+i+":30 PM");
+    		 i++;
+    	 }
+		 return hours;
     	 
      }
      
@@ -303,13 +310,8 @@ public class ClientOrderPageController  extends AbstractController implements In
 		this.shopDropDownMenu.getItems().addAll(storesNames);
 		this.DeliveryMethodChoice.getItems().addAll(this.Delivey);
 		this.GreetingText.setDisable(true);
-		CreateOpeningTimeList();
 		
-		ArrayList<String> hours = new ArrayList<String> ();
-		for (LocalTime h : this.hourList) {
-			 hours.add(h.toString());
-		}
-		
+		ArrayList<String> hours = CreateOpeningTimeList();
 		this.timeChoiseList.getItems().addAll(hours);
         this.UpLbl.setText("");
         this.UpLbl1.setText("");

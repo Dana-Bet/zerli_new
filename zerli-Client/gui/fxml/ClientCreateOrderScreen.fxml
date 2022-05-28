@@ -35,3 +35,4 @@
       <Label fx:id="NumberOfProductLbl" layoutX="876.0" layoutY="57.0" prefHeight="23.0" prefWidth="19.0" textFill="#f80909" />
    </children>
 </AnchorPane>
+

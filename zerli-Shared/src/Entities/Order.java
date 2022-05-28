@@ -108,7 +108,8 @@ public class Order implements Serializable{
 
 	public String getSuppTime() {
 		
-		return this.suppTime.toString();
+		String[] suppTime = this.suppTime.split(" ");
+		return suppTime[0];
 	}
 
 	public String getSuppDate() {

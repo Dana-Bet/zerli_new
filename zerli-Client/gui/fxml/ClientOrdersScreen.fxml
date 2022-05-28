@@ -49,5 +49,10 @@
             <Font size="15.0" />
          </font>
       </Button>
+      <Label fx:id="upLbl" layoutX="555.0" layoutY="476.0" prefHeight="17.0" prefWidth="224.0" textFill="RED">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
