@@ -15,5 +15,5 @@ public enum MessageType {
 	getIdFromComplaitnDB, getIdFromComplaitnDB_succ, ShowTableComlaintInDB, getTableComplaintsFromDB_succ, setRefundToClient, GetStore,
 	getStore_succ, getTypesForCEOordersReports, getTypeProductForCEOordersReports_succ, getStoresForCEOordersReports, getHomwStoreForCEOordersReports_succ, getCEOordersReport, getCEOordersReports_succ, 
 	InitialShopsList, CreditCardList, CreditValue, CreditUsed, Add_New_Payment_Method, Add_Order, IsNewClient, UpdateNewClientDiscount, UpdateNewClientDiscount_succ, IsNewClient_succ,
-	Add_Order_succ, Add_New_Payment_Method_succ, CreditUsed_succ, CreditValue_succ, CreditCardList_succ, InitialShopsList_succ, Add_Recipt, Add_Recipt_succ,
+	Add_Order_succ, Add_New_Payment_Method_succ, CreditUsed_succ, CreditValue_succ, CreditCardList_succ, InitialShopsList_succ, Add_Recipt, Add_Recipt_succ, Get_All_Order_by_id, Get_All_Order_by_id_succ, getRecipt, getRecipt_succ,
 }

@@ -88,6 +88,9 @@ public class ClientCart {
 			return totalPrice;
 	      }
 
+	      public void setNumberOfItems() {
+			this.NumberOfItems=0; 
+	      }
 	      
 	      public Integer getNumberOfItems() {
 			return this.NumberOfItems; 
@@ -121,7 +124,8 @@ public class ClientCart {
 	    		  }
 	    		  else {
 	    			  int quan = i.size();
-	    			  recipt.append(" "+quan+" "+i.get(0).toString());
+	    			  String temp = "-"+quan+" "+i.get(0).toString();
+	    			  recipt.append(temp);
 	    		  }
 	    		  recipt.append("#");
 	    	  }

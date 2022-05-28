@@ -67,7 +67,7 @@ public class Item_In_Catalog implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "\n" + this.getName() + "  "+this.getPrice().toString();
+		return this.getName() + "  "+this.getPrice().toString();
 	}
 
 	public boolean equals( Object Other) {

@@ -110,7 +110,7 @@ public class ClientOrderPageController  extends AbstractController implements In
     	setTime();
     	if(checkAllFileds()!=1) {return;}
     	if(this.IsDelivery) {
-    		TotalPrice +=this.delivery_price;
+    		ClientOrderPageController.TotalPrice +=this.delivery_price;
     		addDetailsToRecipt.append("Extra "+this.delivery_price+"$ shipping #");
     	}
     	createOrder();
@@ -118,14 +118,17 @@ public class ClientOrderPageController  extends AbstractController implements In
     	start(event, "PaymentScreen", "Payment screen", "");
     }
     
-	private void createOrder() {
+    private void createOrder() {
 		if (AddGreeting) {
-			order = new Order(greeting,choosingShop,LoginScreenController.user.getId(),this.suppTime,this.suppDate,this.DeliverM);	
+			order = new Order(greeting,"Not confirm",choosingShop,LoginScreenController.user.getId(),this.suppTime.toString(),this.suppDate.toString(),this.DeliverM);	
 	}
 		else {
-			order = new Order("without",choosingShop,LoginScreenController.user.getId(),this.suppTime,this.suppDate,this.DeliverM);	
+			order = new Order("without","Not confirm",choosingShop,LoginScreenController.user.getId(),this.suppTime.toString(),this.suppDate.toString(),this.DeliverM);	
 			}
+		if(this.DeliverM.compareTo("delivery")==0) {
+			 order.delivery = this.delivery;
 		}
+   }
 
 	@FXML
     private void getDeliveryDetails(ActionEvent event) {

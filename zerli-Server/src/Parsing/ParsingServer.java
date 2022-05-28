@@ -8,6 +8,7 @@ import Entities.CreditCard;
 import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.Order;
 import Entities.OrdersReport;
 import Entities.RevenueReport;
 import Entities.Store;
@@ -106,7 +107,7 @@ public class ParsingServer {
 		}
 		case CreditValue:{
 			String userId = (String) receivedMessage.getMessageData();
-			int credit= Query.getCreditValue(userId);
+			Integer credit= Query.getCreditValue(userId);
 			return (new Message(MessageType.CreditValue_succ,credit));
 		}
 		case CreditUsed:{
@@ -174,11 +175,22 @@ public class ParsingServer {
 			return (new Message(MessageType.Add_Recipt_succ,""));
 			
 		}
+		case Get_All_Order_by_id :{
+			String userId = (String) receivedMessage.getMessageData();
+			ArrayList<Order> orders=Query.get_Orders_list(userId);
+			return (new Message(MessageType.Get_All_Order_by_id_succ,orders));
+		}
+		case getRecipt :{
+			int orderNum = (int) receivedMessage.getMessageData();
+			ArrayList<String> Recipt = Query.getRecipt(orderNum);
+			return (new Message(MessageType.getRecipt_succ,Recipt));
+			
+		}
 		default:
 			break;
 		
 		}
-		//dana
+	
 		return receivedMessage;
 }
 

@@ -7,6 +7,7 @@ import Entities.Complaint;
 import Entities.CreditCard;
 import Entities.Item_In_Catalog;
 import Entities.Message;
+import Entities.Order;
 import Entities.OrdersReport;
 import Entities.RevenueReport;
 import Entities.Store;
@@ -16,6 +17,7 @@ import controlers.CartScreenController;
 import controlers.ClientAssemblyProductController;
 import controlers.ClientCatalogController;
 import controlers.ClientOrderPageController;
+import controlers.ClientOrdersController;
 import controlers.LoginScreenController;
 import controlers.ManagerAddAccountController;
 import controlers.ManagerFreezeController;
@@ -96,45 +98,61 @@ public class ParsingClient {
 		}
 		case getCustomerToFreeze_succ:{
 			ManagerFreezeController.customerList =  (ArrayList<String>)(receivedMessage.getMessageData());
+		    break;
 		}
 		case getHomwStore_succ:{
 			ManagerFreezeController.homeStoreList = (ArrayList<String>)(receivedMessage.getMessageData());
+		    break;
 		}
 		case getNamesitems_succ:{
 			UpdateItemsInCatalogController.NamesproductList = (ArrayList<String>)(receivedMessage.getMessageData());
+		    break;
 		}
 		case getTypeProductForCatalog_succ:{
 			UpdateItemsInCatalogController.productType1 = (ArrayList<String>)(receivedMessage.getMessageData());
+		    break;
 		}
 		case InitialShopsList_succ :{
 			ArrayList<Store> stores= new ArrayList<>();
 			stores = (ArrayList<Store>) (receivedMessage.getMessageData());
 			ClientOrderPageController.storesList = stores;
+		    break;
 		}
 		case CreditCardList_succ :{
 			PaymentScreenController.cardList =  (ArrayList<CreditCard>) (receivedMessage.getMessageData());
+		    break;
 		
 		}
 		case CreditValue_succ :{
 			PaymentScreenController.CreditAmmount =receivedMessage.getMessageData() ;
-		
+		    break;
 		}
 		case CreditUsed_succ:{
-			
+		    break;
 		}
 		
 		case Add_New_Payment_Method_succ:{
-			
+		    break;
 		}
 		case Add_Order_succ:{
 			PaymentScreenController.OrderNum= receivedMessage.getMessageData();	
-		
+		    break;
 		}
 		case IsNewClient_succ:{
-			PaymentScreenController.newClient= receivedMessage.getMessageData();		
+			PaymentScreenController.newClient= receivedMessage.getMessageData();
+		    break;
 		}
 		case UpdateNewClientDiscount_succ:{
-			
+		    break;
+		}
+		case Get_All_Order_by_id_succ:{///+++
+			ClientOrdersController.list = (ArrayList<Order>) (receivedMessage.getMessageData());
+		    break;
+		}
+		case getRecipt_succ:{
+			ClientOrdersController.recipt =  (ArrayList<String>)( receivedMessage.getMessageData());
+		    break;
+
 		}
 //		case getIdFromComplaitnDB_succ:{
 //			TableComplaintsScreenController.listID = (ArrayList<String>)(receivedMessage.getMessageData());

@@ -29,7 +29,7 @@ public class PaymentScreenController extends AbstractController implements Initi
 	public static Float TotalPrice;
 	private String choosingCard=null;
 	String ChoosingMethod = null;
-	public static Object newClient =null;
+	public static Object newClient ;
 	public static Object OrderNum;
 	private RadioButton selectedRadioButton;
 	private LocalDate exDate;
@@ -108,16 +108,16 @@ public class PaymentScreenController extends AbstractController implements Initi
 	    
 		if(this.creditUsed>0) {//if the client used credit we need to update in DB
 			ClientOrderPageController.addDetailsToRecipt.append("-"+creditUsed+" credit used\n");
-			creditUsed = (Integer)PaymentScreenController.CreditAmmount-creditUsed;
+			int creditToUpdate= (Integer)PaymentScreenController.CreditAmmount-creditUsed;
 			StringBuilder str = new StringBuilder();
 			str.append(LoginScreenController.user.getId());
 			str.append("@");
-			str.append(this.creditUsed);
+			str.append(creditToUpdate);
 			ClientUI.chat.accept(new Message(MessageType.CreditUsed,str.toString()));	
 			}		
 		PaymentScreenController.TotalPrice-=this.creditUsed;
 		
-		if(newClient!=null)
+		if((Integer)newClient!=0)
 		{
 		  ClientOrderPageController.addDetailsToRecipt.append("-20% off for first purchase !!#");
   	      ClientUI.chat.accept(new Message(MessageType.UpdateNewClientDiscount,id));
@@ -131,6 +131,7 @@ public class PaymentScreenController extends AbstractController implements Initi
 		updateReciptInDB();
 		
 		CartScreenController.cart.Order_Components.clear();
+		CartScreenController.cart.setNumberOfItems();
 		start(event, "ClientMainPage", "Main page", "");
 
     }
@@ -139,11 +140,10 @@ public class PaymentScreenController extends AbstractController implements Initi
 
     	StringBuilder str = new StringBuilder();
     	System.out.println(CartScreenController.cart.Recipt);
-//		str.append(OrderNum);
-//		str.append("@");
-//		str.append(CartScreenController.cart.Recipt);
-//		
-//        ClientUI.chat.accept(new Message(MessageType.Add_Recipt,str.toString()));
+		str.append(OrderNum);
+		str.append("@");
+		str.append(CartScreenController.cart.Recipt);		
+        ClientUI.chat.accept(new Message(MessageType.Add_Recipt,str.toString()));
 		
 	}
 
@@ -237,16 +237,16 @@ public class PaymentScreenController extends AbstractController implements Initi
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		newClient =null;
 		PaymentScreenController.TotalPrice = ClientOrderPageController.TotalPrice;
 		ClientUI.chat.accept(new Message(MessageType.IsNewClient,id));
-		if(newClient!=null)
+		if((Integer)newClient!=0)
 		{
           PaymentScreenController.TotalPrice = (float) (TotalPrice*0.8);
 		}	
-		ClientUI.chat.accept(new Message(MessageType.CreditValue,id));
-
-
+		
 		ClientUI.chat.accept(new Message(MessageType.CreditCardList,id));
+		
 		ArrayList<String> cardsForView = new ArrayList<String>();
 		for(CreditCard c : cardList ) {
 			 cardsForView.add(c.toString());
@@ -259,7 +259,7 @@ public class PaymentScreenController extends AbstractController implements Initi
 		if((Integer)CreditAmmount > TotalPrice ) {
 			PaymentScreenController.CreditAmmount =TotalPrice.intValue();
 		}
-	
+		
 		while(i<=(Integer)PaymentScreenController.CreditAmmount) {
 			numList.add(i);
 			i++;

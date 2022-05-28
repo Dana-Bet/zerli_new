@@ -423,9 +423,9 @@ public class Query {
 		return creditCards;
 		}
 
-		public static int getCreditValue(String userId) {
+		public static Integer getCreditValue(String userId) {
 			PreparedStatement stmt;
-			int credit = 0;
+			Integer credit = new Integer(0);
 			try {
 				stmt = DBConnect.conn.prepareStatement("SELECT Credit FROM zerli_db.client WHERE client_id = ?");
 				stmt.setString(1,userId);
@@ -531,6 +531,28 @@ public class Query {
 				} catch (SQLException e) {
 			e.printStackTrace();
 				}
+		}
+		
+		public static ArrayList<Order> get_Orders_list(String userId) 
+		{
+			ArrayList<Order> orders =new ArrayList<Order>(); 
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT * From zerli_db.orders WHERE clientId = ?");
+				stmt.setString(1,userId);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					orders.add(new Order(rs.getInt("OrderNum"),rs.getString("store"),rs.getString("greeting"),rs.getString("status"),rs.getString("price"),
+							rs.getString("supplimentMethod"),rs.getString("supplimentTime"),rs.getString("supplimentDate"),rs.getTime("OrderTime")));
+				}
+				
+				rs.close();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+
+			return orders;
 		}
 			
 		public static ArrayList<String> getIDFromComplaintDB() {
@@ -665,7 +687,31 @@ public class Query {
 	
 			
 		}
+
+		public static ArrayList<String> getRecipt(int orderNum) {
+			PreparedStatement stmt;
+			String recipt = null;
+			ArrayList<String> ReciptList = new ArrayList<String>();
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT Recipts FROM zerli_db.orders_recipts WHERE OrderNum = ?");
+				stmt.setInt(1,orderNum);
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()) {
+					recipt =rs.getString("Recipts");
+				}
+				rs.close();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			String [] splitRecipt = recipt.split("#");
+	        for(String i : splitRecipt) {
+	        	ReciptList.add(i);
+	        }
+		return ReciptList;
+		}
+		
 }
+
 		
 	
 
