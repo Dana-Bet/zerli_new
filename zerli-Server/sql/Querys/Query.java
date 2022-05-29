@@ -572,31 +572,31 @@ public class Query {
 			return listID;				
 		}
 
-		public static ArrayList<Complaint> getCmplaintsTable() {
-			ArrayList<Complaint> list = new ArrayList<>();
-			Statement stmt;
-			try {
-				if (DBConnect.conn != null) {
-					stmt = DBConnect.conn.createStatement();
-					ResultSet rs = stmt.executeQuery("SELECT * FROM zerli_db.complaints");
-					while (rs.next()) {
-						String name = rs.getString("name");
-						String id = rs.getString("id");
-						String time = rs.getString("time");
-						String status = rs.getString("status");
-						String reason = rs.getString("reason");
-						list.add(new Complaint(name,id,time,status,reason));
-					}
-					rs.close();
-				} else {
-					System.out.println("Conn is null");
-				}
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			return list;
-		}
+//		public static ArrayList<Complaint> getCmplaintsTable() {
+//			ArrayList<Complaint> list = new ArrayList<>();
+//			Statement stmt;
+//			try {
+//				if (DBConnect.conn != null) {
+//					stmt = DBConnect.conn.createStatement();
+//					ResultSet rs = stmt.executeQuery("SELECT * FROM zerli_db.complaints");
+//					while (rs.next()) {
+//						String name = rs.getString("name");
+//						String id = rs.getString("id");
+//						String time = rs.getString("time");
+//						String status = rs.getString("status");
+//						String reason = rs.getString("reason");
+//						list.add(new Complaint(name,id,time,status,reason,));
+//					}
+//					rs.close();
+//				} else {
+//					System.out.println("Conn is null");
+//				}
+//
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//			return list;
+//		}
 
 		public static void UpdateRefundToClient(ArrayList<String> details) {
 			PreparedStatement stmt;
@@ -744,7 +744,25 @@ public class Query {
 
 			return orders;
 		}
+
+		public static void userUpdateComplaint(ArrayList<String> details) {
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("INSERT INTO zerli_db.complaints (OrderNum,id,complaintTime,status,reason,refund,priceOfOrder) VALUES(?,?,now(),?,?,?,?)");
+				stmt.setInt(1,Integer.valueOf(details.get(1)));
+				stmt.setString(2,details.get(5));
+				stmt.setString(3,details.get(0));
+				stmt.setString(4,details.get(4));
+				stmt.setString(5,details.get(2));
+				stmt.setString(6,details.get(3));
+				stmt.executeUpdate();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			
+		}
 }
+
 		
 
 

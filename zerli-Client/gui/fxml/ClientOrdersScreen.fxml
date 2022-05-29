@@ -38,7 +38,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <TextArea fx:id="ViewRecipt" layoutX="22.0" layoutY="298.0" prefHeight="159.0" prefWidth="477.0" />
+      <TextArea fx:id="ViewRecipt" layoutX="34.0" layoutY="298.0" prefHeight="159.0" prefWidth="477.0" />
       <Button fx:id="CancelBtn" layoutX="555.0" layoutY="363.0" mnemonicParsing="false" onAction="#CancelSelectedOrder" prefHeight="25.0" prefWidth="224.0" text="Cancel this order">
          <font>
             <Font size="15.0" />
@@ -49,7 +49,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <Label fx:id="upLbl" layoutX="555.0" layoutY="476.0" prefHeight="17.0" prefWidth="224.0" textFill="RED">
+      <Label fx:id="upLbl" layoutX="59.0" layoutY="466.0" prefHeight="19.0" prefWidth="417.0" textFill="RED">
          <font>
             <Font size="13.0" />
          </font>

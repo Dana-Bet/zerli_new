@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public abstract class AbstractController {
@@ -51,18 +52,20 @@ public abstract class AbstractController {
 	}
 	
 	public void startPopUp(ActionEvent event, String fxmlName, String title, String toDisplay) throws IOException {
-		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = new Stage();
 		FXMLLoader load = new FXMLLoader(getClass().getResource("/fxml/" + fxmlName + ".fxml"));
 		Parent root = load.load();
 		AbstractController aFrame = load.getController();
 		aFrame.display(toDisplay);
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("Zer-li" + " " + title);
-		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
-		primaryStage.show();
-
+		stage.setScene(new Scene(root));
+		stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
 	}
+	
+	public void stopPopUp(ActionEvent event) throws IOException {
+		((Node) event.getSource()).getScene().getWindow().hide();
+	}
+
 
 
 }

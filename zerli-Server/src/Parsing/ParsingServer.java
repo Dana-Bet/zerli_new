@@ -196,6 +196,12 @@ public class ParsingServer {
 			ArrayList<Order> orders=Query.get_Orders_list_for_manager(ManagerStore);
 			return (new Message(MessageType.Get_All_Order_by_Store_succ,orders));
 		}
+		case  UpdateComplaint:{
+			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
+			Query.userUpdateComplaint(details);
+			return (new Message(MessageType. UpdateComplaint_succ,""));
+
+		}
 		default:
 			break;
 		

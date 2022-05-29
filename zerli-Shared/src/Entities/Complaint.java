@@ -1,41 +1,39 @@
 package Entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class Complaint implements Serializable{
 	
-	
-	
 	private static final long serialVersionUID = 1L;
-	private String name,id,time,status,reason;
+	private String id,status,reason,refund,priceOfOrder,content;
+	private int orderNum;
+	Timestamp complaintTime;
 	
-	public Complaint(String name, String id, String time,String status, String reason) {
-		this.name = name;
+	public Complaint(int orderNum, String id, Timestamp complaintTime,String status, String reason,String refund,String price,String content) {
+		this.orderNum = orderNum;
 		this.id = id;
-		this.time = time;
+		this.complaintTime = complaintTime;
 		this.status = status;
 		this.reason = reason;
+		this.refund = refund;
+		this.priceOfOrder = price;
+		this.content = content;
 	
 	}
 	
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getTime() {
-		return time;
+	public Timestamp getComplaintTime() {
+		return complaintTime;
 	}
-	public void setTime(String time) {
-		this.time = time;
+	public void setComplaintTime(Timestamp complaintTime) {
+		this.complaintTime = complaintTime;
 	}
 	public String getStatus() {
 		return status;
@@ -48,5 +46,27 @@ public class Complaint implements Serializable{
 	}
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+	public String getRefund() {
+		return refund;
+	}
+	public void setRefund(String refund) {
+		this.refund = refund;
+	}
+	public int getOrderNum() {
+		return orderNum;
+	}
+	public void setOrderNum(int orderNum) {
+		this.orderNum = orderNum;
+	}
+
+
+	public String getPriceOfOrder() {
+		return priceOfOrder;
+	}
+
+
+	public String getContent() {
+		return content;
 	}
 }
