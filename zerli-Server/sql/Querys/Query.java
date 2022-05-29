@@ -709,8 +709,44 @@ public class Query {
 	        }
 		return ReciptList;
 		}
-		
+
+		public static void UpdateOrderSt(ArrayList<String> details) {
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("UPDATE zerli_db.orders SET status=? WHERE OrderNum = ?");
+				stmt.setString(1,details.get(0));
+				stmt.setInt(2,Integer.valueOf(details.get(1)));
+				stmt.executeUpdate();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			
+		}
+
+		public static ArrayList<Order> get_Orders_list_for_manager(String managerStore) {
+			ArrayList<Order> orders =new ArrayList<Order>(); 
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT * From zerli_db.orders WHERE store = ?");
+				stmt.setString(1,managerStore);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					orders.add(new Order(rs.getInt("OrderNum"),rs.getString("store"),rs.getString("greeting"),rs.getString("status"),rs.getString("price"),
+							rs.getString("supplimentMethod"),rs.getString("supplimentTime"),rs.getString("supplimentDate"),rs.getTimestamp("OrderTime")));
+				}
+				
+				rs.close();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+
+			return orders;
+		}
 }
+		
+
 
 		
 	

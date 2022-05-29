@@ -21,6 +21,7 @@ import controlers.ClientOrdersController;
 import controlers.LoginScreenController;
 import controlers.ManagerAddAccountController;
 import controlers.ManagerFreezeController;
+import controlers.ManagerOrdersController;
 import controlers.ManagerViewReportsOrders;
 import controlers.ManagerViewReportsRevenueController;
 import controlers.UpdateItemsInCatalogController;
@@ -48,7 +49,7 @@ public class ParsingClient {
 						LoginScreenController.user = null;
 					} else {
 						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
-								DivedMsg[4], DivedMsg[5], DivedMsg[6],DivedMsg[7],DivedMsg[8]);
+								DivedMsg[4], DivedMsg[5], DivedMsg[6],DivedMsg[7],DivedMsg[8],DivedMsg[9]);
 						LoginScreenController.statusUser = "Active";
 						CartScreenController.cart = new ClientCart();
 					}
@@ -154,21 +155,30 @@ public class ParsingClient {
 		    break;
 
 		}
-//		case getIdFromComplaitnDB_succ:{
-//			TableComplaintsScreenController.listID = (ArrayList<String>)(receivedMessage.getMessageData());
-//		}
-//		case getTableComplaintsFromDB_succ:{
-//			TableComplaintsScreenController.listTable = (ArrayList<Complaint>)(receivedMessage.getMessageData());
-//		}
-//		case getHomwStoreForCEOordersReports_succ:{
-//			CEOViewReportsOrdersController.stores = (ArrayList<String>)(receivedMessage.getMessageData());
-//		}
-//		case getTypeProductForCEOordersReports_succ:{
-//			CEOViewReportsOrdersController.types = (ArrayList<String>)(receivedMessage.getMessageData());
-//		}
-//		case getCEOordersReports_succ:{
-//			CEOViewReportsOrdersController.reports = (ArrayList<OrdersReport>)(receivedMessage.getMessageData());
-//		}
+		case getIdFromComplaitnDB_succ:{
+			TableComplaintsScreenController.listID = (ArrayList<String>)(receivedMessage.getMessageData());
+			 break;
+		}
+		case getTableComplaintsFromDB_succ:{
+			TableComplaintsScreenController.listTable = (ArrayList<Complaint>)(receivedMessage.getMessageData());
+			 break;
+		}
+		case getHomwStoreForCEOordersReports_succ:{
+			CEOViewReportsOrdersController.stores = (ArrayList<String>)(receivedMessage.getMessageData());
+			 break;
+		}
+		case getTypeProductForCEOordersReports_succ:{
+			CEOViewReportsOrdersController.types = (ArrayList<String>)(receivedMessage.getMessageData());
+			 break;
+		}
+		case getCEOordersReports_succ:{
+			CEOViewReportsOrdersController.reports = (ArrayList<OrdersReport>)(receivedMessage.getMessageData());
+			 break;
+		}
+		case Get_All_Order_by_Store:{
+			 ManagerOrdersController.list = (ArrayList<Order>) (receivedMessage.getMessageData());
+		    break;
+		}
 		default:{
 			break;
 		}

@@ -36,7 +36,21 @@ public class PopupCancelOrderController extends AbstractController implements In
 
 	@Override
 	public void display(String string) {
-		// TODO Auto-generated method stub
+		switch(string) {
+		case "Not refund":{
+			
+		
+		}
+		case "50% refund":{
+			
+		}
+		
+		case "refund all":{
+			
+		}
+		
+		
+		}
 		
 	}
 

@@ -11,10 +11,10 @@ public class Client extends User implements Serializable{
 	private String status,creditCardNumber;
 	
 	public Client(String role, String id, String firstN, String lastN, String userName, String password,String isLoggedIn, String phone,
-			String status, String creditCardNumber,String email)
+			String status, String creditCardNumber,String email,String HomeStore)
 			
 	{
-		super(role, id, firstN, lastN, userName, password, isLoggedIn,phone, email);
+		super(role, id, firstN, lastN, userName, password, isLoggedIn,phone, email,HomeStore);
 		// TODO Auto-generated constructor stub
 		this.status = status;
 		this.creditCardNumber = creditCardNumber;

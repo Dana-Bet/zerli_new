@@ -87,7 +87,7 @@ public class ManagerAddAccountController extends AbstractController implements I
     @FXML
     private TextField txtPassword;
     
-    public static Client Account = new Client(null, null, null, null, null, null, null, null, null, null,null);
+    public static Client Account = new Client(null, null, null, null, null, null, null, null, null, null,null,null);
 	public static boolean ConfirmOpenNewAccountFlag = false;
 	
 	@FXML

@@ -34,6 +34,7 @@ public class ClientOrdersController extends AbstractController implements Initia
 	private String SuppTime;
     private String date;
     private String Status;
+    public static String Price;
     public static String Refund;
     
     @FXML
@@ -95,7 +96,11 @@ public class ClientOrdersController extends AbstractController implements Initia
         	SuppDate=list.get(0).getSuppDate();
         	SuppTime=list.get(0).getSuppTime();
         	Status=list.get(0).getStatus();
-        	
+        	Price =list.get(0).getPrice();
+        	if(Status.equals("canceled")||Status.equals("There is a request to cancel")) {
+            	upLbl.setText("Your order is "+Status);
+            	return;
+        	}
         	
         			
             DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -109,8 +114,7 @@ public class ClientOrdersController extends AbstractController implements Initia
         	Timestamp currentTime = Timestamp.valueOf(LocalDateTime.now());
             long difference_In_Time= suppTimeOfOrder.getTime() - currentTime.getTime();
             long difference_In_Hours= (difference_In_Time/ (1000 * 60 * 60)) % 24;
-            
-            switch((int)difference_In_Hours) {
+            switch((int)difference_In_Hours+1) {
                   case 0:{
                 	  Refund = "Not refund";
                   }
@@ -121,9 +125,12 @@ public class ClientOrdersController extends AbstractController implements Initia
                    	  Refund = "50% refund"; 
                   }
           		default:{
-          			Refund = "refund all"; 
+          		      Refund = "refund all"; 
           		}
         	}
+        	startPopUp(event, "CancelPopUpScreen", "Cancel screen", Refund);
+            
+            
             
             
         }

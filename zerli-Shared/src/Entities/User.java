@@ -5,10 +5,10 @@ import java.io.Serializable;
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 8530287836358627004L;
-	private String userName, password, isLoggedIn, role, id, firstN, lastN, email,Phone;
+	private String userName, password, isLoggedIn, role, id, firstN, lastN, email,Phone,HomeStore;
 
 	public User(String role, String id, String firstN, String lastN, String userName,
-			String password, String isLoggedIn, String phone,String email) {
+			String password, String isLoggedIn, String phone,String email,String HomeStore) {
 		this.role = role;
 		this.id = id;
 		this.firstN = firstN;
@@ -18,16 +18,17 @@ public class User implements Serializable {
 		this.isLoggedIn = isLoggedIn;
 		this.Phone = phone;
 		this.email =email;
-		//this.homeStore = homeStore;
+		this.HomeStore = HomeStore;
+	
 	}
 
-//	public String getHomeStore() {
-//		return homeStore;
-//	}
-//
-//	public void setHomeStore(String homeStore) {
-//		this.homeStore = homeStore;
-//	}
+	public String getHomeStore() {
+		return HomeStore;
+	}
+
+	public void setHomeStore(String homeStore) {
+		this.HomeStore = homeStore;
+	}
 
 	public String getId() {
 		return id;
