@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="880.0" style="-fx-background-image: url('/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ClientOrdersController">
    <children>
-      <TableView fx:id="table" layoutX="19.0" layoutY="111.0" opacity="0.84" prefHeight="159.0" prefWidth="848.0">
+      <TableView fx:id="table" layoutX="14.0" layoutY="111.0" opacity="0.84" prefHeight="159.0" prefWidth="853.0">
          <columns>
             <TableColumn fx:id="orderNumberCol" prefWidth="68.0" text="Order No" />
             <TableColumn fx:id="storeCol" prefWidth="73.0" text="Store" />
@@ -39,12 +39,7 @@
          </font>
       </Button>
       <TextArea fx:id="ViewRecipt" layoutX="34.0" layoutY="298.0" prefHeight="159.0" prefWidth="477.0" />
-      <Button fx:id="CancelBtn" layoutX="555.0" layoutY="363.0" mnemonicParsing="false" onAction="#CancelSelectedOrder" prefHeight="25.0" prefWidth="224.0" text="Cancel this order">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="ComplaintBtn" layoutX="555.0" layoutY="407.0" mnemonicParsing="false" onAction="#SendComplaint" prefHeight="25.0" prefWidth="224.0" text="send complaint">
+      <Button fx:id="CancelBtn" layoutX="555.0" layoutY="362.0" mnemonicParsing="false" onAction="#CancelSelectedOrder" prefHeight="25.0" prefWidth="224.0" text="Cancel this order">
          <font>
             <Font size="15.0" />
          </font>

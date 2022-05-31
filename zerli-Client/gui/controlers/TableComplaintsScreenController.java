@@ -42,7 +42,6 @@ public class TableComplaintsScreenController extends AbstractController implemen
     @FXML
     private TableColumn<Complaint, String> reason;
 
-
     @FXML
     private TextArea refundTxt;
 

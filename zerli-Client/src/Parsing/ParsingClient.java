@@ -18,7 +18,6 @@ import controlers.ClientAssemblyProductController;
 import controlers.ClientCatalogController;
 import controlers.ClientOrderPageController;
 import controlers.ClientOrdersController;
-import controlers.ClientSendComplaintController;
 import controlers.LoginScreenController;
 import controlers.ManagerAddAccountController;
 import controlers.ManagerFreezeController;
@@ -74,6 +73,7 @@ public class ParsingClient {
 			}
 			else {
 				ClientAssemblyProductController.Catalog=Catalog;
+				ClientCatalogController.assembledCatalog=Catalog;
 				ClientAssemblyProductController.catalog_Initilaize = true;
 			}
 		}

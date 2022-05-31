@@ -88,8 +88,6 @@ public class ClientOrdersController extends AbstractController implements Initia
     @FXML
     private Button CancelBtn;
 
-    @FXML
-    private Button ComplaintBtn;
     
     @FXML
     private Label upLbl;
@@ -156,39 +154,6 @@ public class ClientOrdersController extends AbstractController implements Initia
         }
     }
 
-    @FXML
-    void SendComplaint(ActionEvent event) throws IOException {
-    	upLbl.setText("");
-        Order order = null;
-        order = table.getSelectionModel().getSelectedItem();
-        update_Selected_Order_Fileds(order);
-        if(order!=null) {
-        	update_Selected_Order_Fileds(order);
-        	calc_difference_In_Hours(order);
-        	if (this.difference_In_Hours>=0) {
-            	upLbl.setText("The order is not yet delivered to the customer.");
-            	return;
-        	}
-        	else {
-        		
-        		StringBuilder arr =new StringBuilder();
-        		arr.append(String.valueOf(OrderNumber));
-        		arr.append("#");
-        		arr.append(Price);
-        		arr.append("#");
-        		arr.append(LoginScreenController.user.getId());
-        		startPopUp(event, "SendComplaintPopUp", "Contact with our clients service",arr.toString());
-        	}
-        	
-        	
-        	
-        	
-        }
-        else {
-        	upLbl.setText("Please select order from the table.");
-        	return;
-        }
-    }
         
     private void calc_difference_In_Hours(Order order) {
     	
@@ -201,6 +166,7 @@ public class ClientOrdersController extends AbstractController implements Initia
 
     		LocalDateTime t =   LocalDateTime.of(localDate, localTime);
     		Timestamp suppTimeOfOrder = Timestamp.valueOf(t);
+    		
     		Timestamp currentTime = Timestamp.valueOf(LocalDateTime.now());
     		long difference_In_Time= suppTimeOfOrder.getTime() - currentTime.getTime();
     		int seconds = (int) difference_In_Time / 1000;
@@ -214,7 +180,11 @@ public class ClientOrdersController extends AbstractController implements Initia
 
     	OrderTime =order.getOrderTime();
     	SuppDate=order.getSuppDate();
-    	SuppTime=order.getSuppTime();
+    	
+
+    	String[] s = order.getSuppTime().split(" ");
+    	SuppTime=s[0];
+    			
     	Status=order.getStatus();
     	Price =order.getPrice();
     	OrderNumber=order.getOrderNumber();
@@ -248,8 +218,7 @@ public class ClientOrdersController extends AbstractController implements Initia
 		suppTimeCol.setCellValueFactory(new PropertyValueFactory<>("SuppTime"));
 		suppDateCol.setCellValueFactory(new PropertyValueFactory<>("SuppDate"));
 		OrderTimeCol.setCellValueFactory(new PropertyValueFactory<>("OrderTime"));
-		table.setItems(observableList);	
-		
+		table.setItems(observableList);		
         Order order = null;
 	}
 

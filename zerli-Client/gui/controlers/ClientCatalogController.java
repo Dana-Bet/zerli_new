@@ -25,8 +25,9 @@ public class ClientCatalogController extends AbstractController implements Initi
     
 	public static boolean catalog_Initilaize = false ; 
 	public static ArrayList<Item_In_Catalog> Catalog= new ArrayList<>();
+	public static ArrayList<Item_In_Catalog> assembledCatalog = new ArrayList<>();
 	Item_In_Catalog tempItem;
-	String TypeOfProduct;
+	public String TypeOfProduct;
 	private ClientCart cart;
 	int itemId;
 	
@@ -83,7 +84,10 @@ public class ClientCatalogController extends AbstractController implements Initi
 
     @FXML
     private ImageView cartImage;
-    
+
+    @FXML
+    private Button SingleProductsBtn;
+
 
     @FXML
     void Back(ActionEvent event) throws IOException {
@@ -134,21 +138,38 @@ public class ClientCatalogController extends AbstractController implements Initi
     	InitialPerType("pots");
     }
     
+    @FXML
+    void SingleProducts(ActionEvent event) {
+      	InitialPerType("Assembled Items");
+    }
     
     @FXML
     void getItemDetails(ActionEvent event) {
-           
+        String Choosing_Item = listOfProduct.getValue();
     	try {
-    	
-              String Choosing_Item = listOfProduct.getValue();
+    	   if(!TypeOfProduct.equals("Assembled Items")) {
               for (Item_In_Catalog i : Catalog) {
               	if (i.getName().compareTo(Choosing_Item)==0){
               		this.tempItem = new Item_In_Catalog(i.getId(), i.getColor(), i.getName(),
          				   i.getType(), i.getPrice(), i.isAssembleItem());
               		this.itemId=i.getId();
          		     break;
-        	}
-        }
+        	 }
+              }
+              	
+              	
+           }
+    	   else {
+               for (Item_In_Catalog i : assembledCatalog) {
+                 	if (i.getName().compareTo(Choosing_Item)==0){
+                 				this.tempItem = new Item_In_Catalog(i.getId(), i.getColor(), i.getName(),
+            				   i.getType(), i.getPrice(), i.isAssembleItem());
+                 				this.itemId=i.getId();
+                 				break;
+                 		}
+               }
+    	   }
+     
      	
               productNameLbl.setText(tempItem.getName());
               productPriceLbl.setText("Price :"+(tempItem.getPrice()).toString()+" $");
@@ -168,22 +189,33 @@ public class ClientCatalogController extends AbstractController implements Initi
     
     private void InitialPerType(String typeName) {
     	setSelection();
-    	TypeOfProduct = typeName;
-    	this.listOfProduct.setDisable(false);
+        this.TypeOfProduct = typeName;
+     	this.listOfProduct.setDisable(false);
     	listOfProduct.getItems().clear();
     	ArrayList<String> Items =  new ArrayList<String>();
-    	for (Item_In_Catalog i : Catalog) {
-    		if (i.getType().compareTo(typeName)==0) {
-    			Items.add(i.getName());
-    		}	
+    	if(!typeName.equals("Assembled Items")) {
+    		for (Item_In_Catalog i : Catalog) {
+    			if (i.getType().compareTo(typeName)==0) {
+    				Items.add(i.getName());
+    			}	
+    		}
+    	}
+    	else {
+    		for (Item_In_Catalog i : assembledCatalog) {
+    			if (i.getType().compareTo(typeName)==0) {
+    				Items.add(i.getName());
+
+    			}
+    		}
     	}
     	listOfProduct.getItems().addAll(Items);
     	UpdateTypeProLabel.setText(TypeOfProduct);
-    }
+    	
+    	}
 
     private void setSelection() {
     	tempItem =null;
-    	TotalPriceLbl.setText("Price : 0.0$ "+cart.getTotalPrice(itemId).toString()+"$");
+    	TotalPriceLbl.setText("Price : "+cart.getTotalPrice(itemId).toString()+"$");
  	    QuanLbl.setText("0");
         productNameLbl.setText("");
         productPriceLbl.setText("");
@@ -200,6 +232,7 @@ public class ClientCatalogController extends AbstractController implements Initi
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ClientUI.chat.accept(new Message(MessageType.Initialize_Catalog,"0"));
+		ClientUI.chat.accept(new Message(MessageType.Initialize_Catalog,"1"));
 		this.cart = CartScreenController.cart;
 		setSelection();
     	this.listOfProduct.setDisable(true);

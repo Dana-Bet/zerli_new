@@ -72,12 +72,18 @@ public class CartScreenController extends AbstractController implements Initiali
 
         @FXML
         void removeFromProduct(ActionEvent event) {
+        	this.uplbl.setText("");
             ObservableList<LineInCartTable> list;
+            list = null;
             list = this.tableV.getSelectionModel().getSelectedItems();
-            if(list!=null) {
+            if(list!=null&&!list.isEmpty() ) {
                int id =list.get(0).getId() ;
                cart.DecFromCartTable(id);
                this.initialize(location, resources) ;
+            }
+            else {
+        		this.uplbl.setText("Please select item to remove");
+        		return;
             }
         }
 
