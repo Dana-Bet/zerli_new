@@ -325,7 +325,7 @@ public class Query {
 			Statement stmt;
 			try {
 				stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT DISTINCT homeStore FROM zerli_db.users");
+				ResultSet rs = stmt.executeQuery("SELECT DISTINCT city FROM zerli_db.stores");
 				storelist = new ArrayList<String>();
 				while (rs.next()) {
 					storelist.add(rs.getString(1));
@@ -755,7 +755,86 @@ public class Query {
 			// TODO Auto-generated method stub
 			return null;
 		}
-		
+
+		public static ArrayList<Complaint> getComplaints() {
+			ArrayList<Complaint> complaints =new ArrayList<Complaint>(); 
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT * From zerli_db.complaints");
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					complaints.add(new Complaint(rs.getString("clientId"),rs.getString("status"),rs.getTimestamp("complaintTime"),rs.getString("reason"),rs.getString("refund")));
+				}
+				
+				rs.close();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+
+			return complaints;
+		}
+
+		public static ArrayList<String> check_If_Client_Exist(String clientId) {
+			ArrayList<String> clients =new ArrayList<String>(); 
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT client_id From zerli_db.client WHERE client_id = ?");
+				stmt.setString(1,clientId);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					clients.add(rs.getString("client_id"));
+				}
+				
+				rs.close();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+
+			return clients;
+			
+		}
+
+		public static void Update_Complaint(ArrayList<String> details) {
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("INSERT INTO zerli_db.complaints (clientId,complaintTime,status,reason,refund) VALUES(?,now(),?,?,?)");
+				stmt.setString(1,details.get(0));
+				stmt.setString(2,details.get(1));
+				stmt.setString(3,details.get(2));
+				stmt.setString(4,details.get(3));
+				stmt.executeUpdate();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			
+		}
+
+		public static void Update_Complaint_details(ArrayList<String> details) {
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("UPDATE zerli_db.complaints SET status=? AND SET refund=? WHERE clientId=? ");
+				stmt.setString(1,details.get(2));
+				stmt.setString(2,details.get(1));
+				stmt.setString(3,details.get(0));
+				stmt.executeUpdate();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			
+			
+		}
+
+		public static void Update_refund(ArrayList<String> details) {
+			int creditVal = getCreditValue(details.get(0));
+			int newCredit = creditVal +Integer.valueOf(details.get(2));
+			setCreditValue(details.get(0),String.valueOf(newCredit)) ;
+		}
+
+
 }
 
 		

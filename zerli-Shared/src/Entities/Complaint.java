@@ -6,79 +6,54 @@ import java.sql.Timestamp;
 public class Complaint implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private String id,status,reason,refund,priceOfOrder,content;
-	private int orderNum;
+	private String clientId,status,reason,refund;
 	Timestamp complaintTime;
+	private int alert=0;
 	
-	public Complaint(int orderNum, String id, Timestamp complaintTime,String status, String reason,String refund,String price,String content) {
-		this.orderNum = orderNum;
-		this.id = id;
-		this.complaintTime = complaintTime;
-		this.status = status;
-		this.reason = reason;
-		this.refund = refund;
-		this.priceOfOrder = price;
-		this.content = content;
-	
-	}
 	
 
-	public String getId() {
-		return id;
+	public Complaint(String clientId,String status , Timestamp time, String reason,String refund) {
+
+		this.clientId = clientId;
+		this.status = status;
+		this.complaintTime = time;
+		this.reason = reason;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public int getAlert() {
+		return alert;
 	}
-	public Timestamp getComplaintTime() {
-		return complaintTime;
+	
+	public String getClientId() {
+		return clientId;
 	}
-	public void setComplaintTime(Timestamp complaintTime) {
-		this.complaintTime = complaintTime;
-	}
+
 	public String getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+
 	public String getReason() {
 		return reason;
 	}
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
+
 	public String getRefund() {
 		return refund;
 	}
-	public void setRefund(String refund) {
-		this.refund = refund;
+
+	public Timestamp getComplaintTime() {
+		return complaintTime;
 	}
-	public int getOrderNum() {
-		return orderNum;
 	
+	public void setComplaintTime(Timestamp time) {
+		this.complaintTime =time;
 	}
-	public void setOrderNum(int orderNum) {
-		this.orderNum = orderNum;
+	
+	public void setAlert(int f) {
+		this.alert=f;
 	}
-
-
-	public String getPriceOfOrder() {
-		return priceOfOrder;
-	}
-
-
-	public String getContent() {
-		return content;
-	}
-
-
-	public void setContent(String text) {
-		this.content = text;
+	
+	public String toString() {
+		return "Client: "+clientId+"\n"+"Topic: "+reason +"\n"+"Status: "+status+"\n";
 		
 	}
 
-    public String toString() {
-		return this.getReason()+" "+this.getId()+" "+this.getRefund()+" "+this.priceOfOrder;
-    	
-    }
 }

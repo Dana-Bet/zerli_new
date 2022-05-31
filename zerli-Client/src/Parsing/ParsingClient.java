@@ -26,7 +26,8 @@ import controlers.ManagerViewReportsOrders;
 import controlers.ManagerViewReportsRevenueController;
 import controlers.UpdateItemsInCatalogController;
 import controlers.PaymentScreenController;
-import controlers.TableComplaintsScreenController;
+import controlers.CustomerEmTableComplaintsScreenController;
+import controlers.CustomerEm_Insert_New_Com_Controller;
 
 public class ParsingClient {
 
@@ -156,14 +157,6 @@ public class ParsingClient {
 		    break;
 
 		}
-		case getIdFromComplaitnDB_succ:{
-			TableComplaintsScreenController.listID = (ArrayList<String>)(receivedMessage.getMessageData());
-			 break;
-		}
-		case getTableComplaintsFromDB_succ:{
-			TableComplaintsScreenController.listTable = (ArrayList<Complaint>)(receivedMessage.getMessageData());
-			 break;
-		}
 		case getHomwStoreForCEOordersReports_succ:{
 			CEOViewReportsOrdersController.stores = (ArrayList<String>)(receivedMessage.getMessageData());
 			 break;
@@ -179,6 +172,13 @@ public class ParsingClient {
 		case Get_All_Order_by_Store:{
 			 ManagerOrdersController.list = (ArrayList<Order>) (receivedMessage.getMessageData());
 		    break;
+		}
+		case UpdateCompList_succ:{
+			CustomerEmTableComplaintsScreenController.complaints = (ArrayList<Complaint>) (receivedMessage.getMessageData());
+			break;
+		}
+		case ClientExist_succ:{
+			CustomerEm_Insert_New_Com_Controller.ClientEx=!((ArrayList<String>) (receivedMessage.getMessageData())).isEmpty();
 		}
 
 		default:{

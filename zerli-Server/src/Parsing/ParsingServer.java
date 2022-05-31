@@ -196,13 +196,10 @@ public class ParsingServer {
 			ArrayList<Order> orders=Query.get_Orders_list_for_manager(ManagerStore);
 			return (new Message(MessageType.Get_All_Order_by_Store_succ,orders));
 		}
-//		case  UpdateComplaint:{
-//			String[] complaint = (String) receivedMessage.getMessageData();
-//			System.out.println(complaint.toString());
-//			Query.userUpdateComplaint(complaint);
-//			return (new Message(MessageType.UpdateComplaint_succ,""));
-//
-//		}
+		case  UpdateCompList:{
+			return (new Message(MessageType.UpdateCompList_succ,Query.getComplaints()));
+
+		}
 		
 		case getStoresForCEORevenueReports :{
 			ArrayList<String> storeList = Query.GetStoreListForCEORevenueReports();
@@ -214,6 +211,26 @@ public class ParsingServer {
 			ArrayList<RevenueReport> revenue = Query.get_Revenue_Reports_ForCEO(store);
 			return (new Message(MessageType.getRevenueReportForCEO_succ,revenue));
 		}
+		case ClientExist :{
+			String clientId = (String)(receivedMessage.getMessageData());
+			Query.check_If_Client_Exist(clientId);
+			return (new Message(MessageType.ClientExist_succ,Query.check_If_Client_Exist(clientId)));
+		}
+		case Upload_Complaint :{
+			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
+			Query.Update_Complaint(details);
+			return (new Message(MessageType.Upload_Complaint_succ,""));
+		}
+		case UpdateCompLaintDetails :{
+			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
+			Query.Update_Complaint_details(details);
+			return (new Message(MessageType.Upload_Complaint_succ,""));
+		}
+		case Update_refund:{
+			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
+			Query.Update_refund(details);
+		}
+		
 		default:
 			break;
 		

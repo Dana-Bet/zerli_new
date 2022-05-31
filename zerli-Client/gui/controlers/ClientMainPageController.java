@@ -54,7 +54,6 @@ public class ClientMainPageController extends AbstractController implements Init
 
     @FXML
     void logout(ActionEvent event) throws IOException {
-		//we need to clear is cart
     	ClientUI.chat.accept(new Message(MessageType.Disconected,LoginScreenController.user.getUserName()));
 		start(event, "LoginUserScreen", "Login","");
     }

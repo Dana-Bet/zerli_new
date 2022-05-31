@@ -97,7 +97,7 @@ import main.ClientUI;
 
 					}
 					case "CustomerEmployee": {
-						start(event, "CustomerEmployeeScreen", "CustomerEmployee", user.getFirstN());
+						start(event, "CustomerEm_main_page", "Customers service employee screen", user.getFirstN());
 						break;
 
 				    }

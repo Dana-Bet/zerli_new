@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="599.0" prefWidth="909.0" style="-fx-background-image: url('/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ClientMainPageController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-image: url('/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ClientMainPageController">
    <children>
       <Button fx:id="CartBtn" layoutX="779.0" layoutY="9.0" mnemonicParsing="false" onAction="#OpenCartPage" prefHeight="61.0" prefWidth="110.0">
          <graphic>
@@ -22,24 +22,24 @@
             <Font name="Arial" size="21.0" />
          </font>
       </Button>
-      <Button fx:id="CreateOrderBtn" contentDisplay="TOP" layoutX="492.0" layoutY="228.0" mnemonicParsing="false" onAction="#OpenCreateOrdersPage" opacity="0.71" prefHeight="49.0" prefWidth="377.0" text="Create an order">
+      <Button fx:id="CreateOrderBtn" contentDisplay="TOP" layoutX="481.0" layoutY="228.0" mnemonicParsing="false" onAction="#OpenCreateOrdersPage" opacity="0.71" prefHeight="49.0" prefWidth="377.0" text="Create an order">
          <font>
-            <Font name="Yu Gothic UI Light" size="25.0" />
+            <Font name="Yu Gothic UI Light" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="MyAccountBtn" contentDisplay="TOP" layoutX="494.0" layoutY="310.0" mnemonicParsing="false" onAction="#OpenMyAccountPage" opacity="0.71" prefHeight="49.0" prefWidth="377.0" text="My Account">
+      <Button fx:id="MyAccountBtn" contentDisplay="TOP" layoutX="483.0" layoutY="310.0" mnemonicParsing="false" onAction="#OpenMyAccountPage" opacity="0.71" prefHeight="49.0" prefWidth="377.0" text="My Account">
          <font>
-            <Font name="Yu Gothic UI Light" size="25.0" />
+            <Font name="Yu Gothic UI Light" size="20.0" />
          </font>
       </Button>
-      <Label fx:id="HiUserLabel" layoutX="619.0" layoutY="139.0" text="Hi UserName">
+      <Label fx:id="HiUserLabel" layoutX="612.0" layoutY="139.0" text="Hi UserName">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
-      <Button fx:id="MyOrdersBtn" contentDisplay="TOP" layoutX="494.0" layoutY="393.0" mnemonicParsing="false" onAction="#OpenOrdersTable" opacity="0.71" prefHeight="49.0" prefWidth="377.0" text="My Orders">
+      <Button fx:id="MyOrdersBtn" contentDisplay="TOP" layoutX="483.0" layoutY="393.0" mnemonicParsing="false" onAction="#OpenOrdersTable" opacity="0.71" prefHeight="49.0" prefWidth="377.0" text="My Orders">
          <font>
-            <Font name="Yu Gothic UI Light" size="25.0" />
+            <Font name="Yu Gothic UI Light" size="20.0" />
          </font>
       </Button>
       <Label fx:id="NumberOfProductLbl" layoutX="862.0" layoutY="49.0" prefHeight="21.0" prefWidth="18.0" textFill="#f80909" />
