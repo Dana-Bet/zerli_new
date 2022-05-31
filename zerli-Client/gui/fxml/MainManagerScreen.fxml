@@ -38,5 +38,10 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
+      <Button layoutX="158.0" layoutY="390.0" mnemonicParsing="false" onAction="#Orders" prefHeight="47.0" prefWidth="239.0" text="Confirm/Canceled order">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

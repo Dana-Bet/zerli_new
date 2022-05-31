@@ -585,7 +585,7 @@ public class Query {
 //						String time = rs.getString("time");
 //						String status = rs.getString("status");
 //						String reason = rs.getString("reason");
-//						list.add(new Complaint(name,id,time,status,reason,));
+//						list.add(new Complaint(name,id,time,status,reason));
 //					}
 //					rs.close();
 //				} else {
@@ -745,28 +745,68 @@ public class Query {
 			return orders;
 		}
 
-		public static void userUpdateComplaint(ArrayList<String> details) {
+		public static void userUpdateComplaint(Complaint complaint) {
 			PreparedStatement stmt;
 			try {
-				stmt = DBConnect.conn.prepareStatement("INSERT INTO zerli_db.complaints (OrderNum,id,complaintTime,status,reason,refund,priceOfOrder) VALUES(?,?,now(),?,?,?,?)");
-				stmt.setInt(1,Integer.valueOf(details.get(1)));
-				stmt.setString(2,details.get(5));
-				stmt.setString(3,details.get(0));
-				stmt.setString(4,details.get(4));
-				stmt.setString(5,details.get(2));
-				stmt.setString(6,details.get(3));
-				stmt.executeUpdate();
+				stmt = DBConnect.conn.prepareStatement("INSERT INTO zerli_db.complaints (orderNum,id,complaintTime,status,reason,refund,priceOfOrder,content) VALUES(?,?,now(),?,?,?,?,?)");
+				stmt.setInt(1,complaint.getOrderNum());
+				stmt.setString(2,complaint.getId());
+				stmt.setString(3,complaint.getStatus());
+				stmt.setString(4,complaint.getReason());
+				stmt.setString(5,complaint.getRefund());
+				stmt.setString(6,complaint.getPriceOfOrder());
+				stmt.setString(7,complaint.getContent());
 				} catch (SQLException e) {
 			e.printStackTrace();
 				}
 			
 		}
+
+		public static int IfComplaintExist(int orderNum, String reason) {
+			PreparedStatement stmt;
+			int f=0;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT orderNum from zerli_db.complaints WHERE orderNum=? AND reason=?");
+				stmt.setInt(1,orderNum);
+				stmt.setString(2,reason);
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()) {
+					f =rs.getInt("orderNum");
+				}
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			
+			return f;
+			
+		}
+
+		public static ArrayList<String> GetStoreListForCEORevenueReports() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		public static ArrayList<RevenueReport> get_Revenue_Reports_ForCEO(String store) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
 }
 
 		
 
 
-		
+//stmt = DBConnect.conn.prepareStatement("INSERT INTO zerli_db.orders (OrderNum,store,clientId,price,greeting,status,supplimentMethod,supplimentTime,supplimentDate,OrderTime) VALUES(?,?,?,?,?,?,?,?,?,now())");
+//stmt.setInt(1,lastorder+1);
+//stmt.setString(2,store);
+//stmt.setString(3,clientId);
+//stmt.setString(4,price);
+//stmt.setString(5,greeting);
+//stmt.setString(6,status);
+//stmt.setString(7,suppMeth);
+//stmt.setString(8,suppDate);
+//stmt.setString(9,suppTime);
+
 	
 
 

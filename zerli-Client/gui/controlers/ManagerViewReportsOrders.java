@@ -57,18 +57,19 @@ public class ManagerViewReportsOrders extends AbstractController implements Init
 	    
 	    public static ArrayList<String> productType = new ArrayList<String>();
 	    public static String type;
-
+	    public static ArrayList<String> details = new ArrayList<String>();
 		public static ArrayList<OrdersReport> productTypeOrders =  new ArrayList<OrdersReport>();
 	    @FXML
 	    void ShowOrdersReport(ActionEvent event) {
-	    	type = productTypeBtn.getValue();
-	    	ClientUI.chat.accept(new Message(MessageType.getTypeOrders,type));
+	    	 details.add(productTypeBtn.getValue());
+	    	 details.add(LoginScreenController.user.getHomeStore());
+	    	ClientUI.chat.accept(new Message(MessageType.getTypeOrders,details));
 	    	ObservableList<OrdersReport> observableList3 = FXCollections.observableArrayList(productTypeOrders);
 	    	monthcol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("month"));
 	    	yearcol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("year"));
 	    	storecol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("store"));
 	    	Quantitycol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("Quantity"));
-	    	//System.out.println(productTypeOrders);
+	    	System.out.println(productTypeOrders);
 	    	table.setItems(observableList3);
 	    	
 	    }

@@ -24,11 +24,10 @@
       <ComboBox fx:id="typeBtn" layoutX="73.0" layoutY="335.0" prefWidth="150.0" />
       <TableView fx:id="table" layoutX="275.0" layoutY="167.0" prefHeight="194.0" prefWidth="534.0">
          <columns>
-            <TableColumn fx:id="monthcol" prefWidth="75.0" text="month" />
-            <TableColumn fx:id="yearcol" prefWidth="61.60005187988281" text="year" />
-            <TableColumn fx:id="storecol" prefWidth="104.800048828125" text="store" />
-            <TableColumn fx:id="Quantitycol" prefWidth="152.0" text="Quantity" />
-            <TableColumn fx:id="typecol" prefWidth="130.39996337890625" text="type" />
+            <TableColumn fx:id="monthcol" prefWidth="95.199951171875" text="month" />
+            <TableColumn fx:id="yearcol" prefWidth="95.20001220703125" text="year" />
+            <TableColumn fx:id="storecol" prefWidth="138.40005493164062" text="store" />
+            <TableColumn fx:id="Quantitycol" prefWidth="206.4000244140625" text="Quantity" />
          </columns>
       </TableView>
       <Label layoutX="386.0" layoutY="52.0" text="orders report">

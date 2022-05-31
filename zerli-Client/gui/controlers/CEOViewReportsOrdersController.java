@@ -51,12 +51,9 @@ public class CEOViewReportsOrdersController extends AbstractController implement
     private TableColumn<OrdersReport,String> Quantitycol;
 
     @FXML
-    private TableColumn<OrdersReport,String> typecol;
-
-    @FXML
     private Button showBtn;
 
-   ///mm
+ 
     public static ArrayList<String> types = new ArrayList<String>();
     public static ArrayList<String> stores = new ArrayList<String>();
     public static ArrayList<String> details = new ArrayList<String>();
@@ -72,9 +69,9 @@ public class CEOViewReportsOrdersController extends AbstractController implement
     	yearcol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("year"));
     	storecol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("store"));
     	Quantitycol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("Quantity"));
-    	typecol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("type"));
-    	System.out.println(details);
+    	System.out.println(details.toString());
     	table.setItems(observableList);
+    	details.clear();
     }
 	
 	@Override

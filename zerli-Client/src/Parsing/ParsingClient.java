@@ -18,6 +18,7 @@ import controlers.ClientAssemblyProductController;
 import controlers.ClientCatalogController;
 import controlers.ClientOrderPageController;
 import controlers.ClientOrdersController;
+import controlers.ClientSendComplaintController;
 import controlers.LoginScreenController;
 import controlers.ManagerAddAccountController;
 import controlers.ManagerFreezeController;
@@ -179,6 +180,7 @@ public class ParsingClient {
 			 ManagerOrdersController.list = (ArrayList<Order>) (receivedMessage.getMessageData());
 		    break;
 		}
+
 		default:{
 			break;
 		}

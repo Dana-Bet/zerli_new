@@ -58,11 +58,12 @@ public class ManagerViewReportsRevenueController extends AbstractController impl
     @FXML
     private TableColumn<RevenueReport, String> tableColumnquarterly;
    
-    public static boolean ViewReportsRevenueFlag = false;
     public static ArrayList<RevenueReport> revenue= new ArrayList<RevenueReport>();
 	public static ArrayList<String> years;
 	public static ArrayList<String> months;
 	public static ArrayList<String> details = new ArrayList<String>();
+
+	public static boolean ViewReportsRevenueFlag;
     @FXML
     void ShowRevenueReport(ActionEvent event) {
     	details.add(LoginScreenController.user.getId());
@@ -86,7 +87,6 @@ public class ManagerViewReportsRevenueController extends AbstractController impl
     ////ksksksnnnnn
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ViewReportsRevenueFlag = false;
 		ClientUI.chat.accept(new Message(MessageType.getYear,null));
 		ObservableList<String> observableList1 = FXCollections.observableArrayList(years);
 		yearComboBox.setItems(observableList1);

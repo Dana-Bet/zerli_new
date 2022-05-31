@@ -55,6 +55,7 @@ public class Complaint implements Serializable{
 	}
 	public int getOrderNum() {
 		return orderNum;
+	
 	}
 	public void setOrderNum(int orderNum) {
 		this.orderNum = orderNum;
@@ -69,4 +70,15 @@ public class Complaint implements Serializable{
 	public String getContent() {
 		return content;
 	}
+
+
+	public void setContent(String text) {
+		this.content = text;
+		
+	}
+
+    public String toString() {
+		return this.getReason()+" "+this.getId()+" "+this.getRefund()+" "+this.priceOfOrder;
+    	
+    }
 }

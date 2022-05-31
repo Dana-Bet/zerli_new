@@ -142,8 +142,8 @@ public class ParsingServer {
 			return (new Message(MessageType.getIdFromComplaitnDB_succ,listID));
 		}
 		case ShowTableComlaintInDB:{
-			ArrayList<Complaint> tableComplaints = (ArrayList<Complaint>) Query.getCmplaintsTable();
-			return (new Message(MessageType.getTableComplaintsFromDB_succ,tableComplaints));
+		//	ArrayList<Complaint> tableComplaints = (ArrayList<Complaint>) Query.getCmplaintsTable();
+			//return (new Message(MessageType.getTableComplaintsFromDB_succ,tableComplaints));
 		}
 		case setRefundToClient:{
 			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
@@ -196,18 +196,31 @@ public class ParsingServer {
 			ArrayList<Order> orders=Query.get_Orders_list_for_manager(ManagerStore);
 			return (new Message(MessageType.Get_All_Order_by_Store_succ,orders));
 		}
-		case  UpdateComplaint:{
-			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
-			Query.userUpdateComplaint(details);
-			return (new Message(MessageType. UpdateComplaint_succ,""));
-
+//		case  UpdateComplaint:{
+//			String[] complaint = (String) receivedMessage.getMessageData();
+//			System.out.println(complaint.toString());
+//			Query.userUpdateComplaint(complaint);
+//			return (new Message(MessageType.UpdateComplaint_succ,""));
+//
+//		}
+		
+		case getStoresForCEORevenueReports :{
+			ArrayList<String> storeList = Query.GetStoreListForCEORevenueReports();
+			System.out.println(storeList);
+			return (new Message(MessageType.getHomwStoreForCEORevenenueReports_succ,storeList));
+		}
+		case showRevenueReportsForCEO :{
+			String store = (String)(receivedMessage.getMessageData());
+			ArrayList<RevenueReport> revenue = Query.get_Revenue_Reports_ForCEO(store);
+			return (new Message(MessageType.getRevenueReportForCEO_succ,revenue));
 		}
 		default:
 			break;
 		
 		}
+
 	
 		return receivedMessage;
-}
+      }
 
 }

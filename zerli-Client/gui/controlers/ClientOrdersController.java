@@ -165,8 +165,8 @@ public class ClientOrdersController extends AbstractController implements Initia
         if(order!=null) {
         	update_Selected_Order_Fileds(order);
         	calc_difference_In_Hours(order);
-        	if (this.difference_In_Hours>0) {
-            	upLbl.setText("The order is not yet delivered to the customer .");
+        	if (this.difference_In_Hours>=0) {
+            	upLbl.setText("The order is not yet delivered to the customer.");
             	return;
         	}
         	else {

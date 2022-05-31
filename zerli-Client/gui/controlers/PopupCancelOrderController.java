@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import Entities.Complaint;
 import Entities.Message;
 import Entities.MessageType;
 import javafx.event.ActionEvent;
@@ -46,11 +47,9 @@ public class PopupCancelOrderController extends AbstractController implements In
 		arr.add("There is a request to cancel");
 		arr.add(String.valueOf(OrderNumber));
 		ClientUI.chat.accept(new Message(MessageType.UpdateOrderStatus,arr));
-		arr.add(Refund);//2
-		arr.add(Price);//3
-		arr.add(reason);//4
-		arr.add(Userid);
-		ClientUI.chat.accept(new Message(MessageType.UpdateComplaint,arr));
+		Complaint complaint = new Complaint(Integer.valueOf(OrderNumber),Userid,
+				Timestamp.valueOf(LocalDateTime.now()),"waiting for response",reason,Refund, Price,"Without"); 
+		ClientUI.chat.accept(new Message(MessageType.UpdateComplaint,complaint));
 		stopPopUp(event);
     }
 
