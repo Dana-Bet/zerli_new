@@ -38,7 +38,7 @@ public class CustomerEm_Handeling_Cop_controller  extends AbstractController imp
 
 
 	@FXML
-    void Update_Complaint_det(ActionEvent event) {
+    void Update_Complaint_det(ActionEvent event) throws IOException {
 		try {
         String refund =this.RefunText.getText();
         if(Integer.parseInt(refund)>0) 
@@ -49,6 +49,7 @@ public class CustomerEm_Handeling_Cop_controller  extends AbstractController imp
         	arr.add(refund);
         	ClientUI.chat.accept(new Message(MessageType.UpdateCompLaintDetails,arr));
         	ClientUI.chat.accept(new Message(MessageType.Update_refund,arr));
+        	stopPopUp(event);
         }
 		}catch(NumberFormatException e){
 			
@@ -57,6 +58,7 @@ public class CustomerEm_Handeling_Cop_controller  extends AbstractController imp
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		System.out.println("nnnn");
 		if( CustomerEmTableComplaintsScreenController.complaint.getAlert()==1) {
 			this.upLbl.setText("Its recommended to compensate that client because he waited a long time for the response.");
 		}

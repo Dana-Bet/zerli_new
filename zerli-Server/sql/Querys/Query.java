@@ -37,24 +37,24 @@ public class Query {
 					}
 					role = rs.getNString(1);
 					result.append(rs.getString(1));
-					result.append("@");
+					result.append("#");
 					ID = rs.getString(2);
 					result.append(rs.getString(2));
-					result.append("@");
+					result.append("#");
 					result.append(rs.getString(3));//firstName
-					result.append("@");
+					result.append("#");
 					result.append(rs.getString(4));//lastName
-					result.append("@");
+					result.append("#");
 					result.append(rs.getString(5));//userName
-					result.append("@");
+					result.append("#");
 					result.append(rs.getString(6));//password
-					result.append("@");
+					result.append("#");
 					result.append(rs.getString(7));//isLoogin
-					result.append("@");
+					result.append("#");
 					result.append(rs.getString(8));//phone
-					result.append("@");
+					result.append("#");
 					result.append(rs.getString(9));//email
-					result.append("@");
+					result.append("#");
 					result.append(rs.getString(10));//homeStore
 
 				}
@@ -554,6 +554,28 @@ public class Query {
 
 			return orders;
 		}
+		
+		public static ArrayList<Order> get_Orders_list_by_store(String store)	{
+			ArrayList<Order> orders =new ArrayList<Order>(); 
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT * From zerli_db.orders WHERE store = ?");
+				stmt.setString(1,store);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					orders.add(new Order(rs.getInt("OrderNum"),rs.getString("store"),rs.getString("greeting"),rs.getString("status"),rs.getString("price"),
+							rs.getString("supplimentMethod"),rs.getString("supplimentTime"),rs.getString("supplimentDate"),rs.getTimestamp("OrderTime")));
+				}
+				
+				rs.close();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+
+			return orders;
+		}
+
 			
 		public static ArrayList<String> getIDFromComplaintDB() {
 			ArrayList<String> listID = new ArrayList<String>();
@@ -598,19 +620,6 @@ public class Query {
 //			return list;
 //		}
 
-		public static void UpdateRefundToClient(ArrayList<String> details) {
-			PreparedStatement stmt;
-			System.out.println(details.get(0));
-			System.out.println(details.get(1));
-			try {
-		    	stmt = DBConnect.conn.prepareStatement("INSERT INTO refund(id,amount) VALUES(?,?)");
-		    	stmt.setString(1,details.get(0));
-		    	stmt.setString(2,details.get(1));
-			    stmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}			
-		}
 
 		public static ArrayList<String> getListOfStoreForCeo() {
 				ArrayList<String> stores = new ArrayList<String>();
@@ -724,27 +733,6 @@ public class Query {
 			
 		}
 
-		public static ArrayList<Order> get_Orders_list_for_manager(String managerStore) {
-			ArrayList<Order> orders =new ArrayList<Order>(); 
-			PreparedStatement stmt;
-			try {
-				stmt = DBConnect.conn.prepareStatement("SELECT * From zerli_db.orders WHERE store = ?");
-				stmt.setString(1,managerStore);
-				ResultSet rs = stmt.executeQuery();
-				while (rs.next()) {
-					orders.add(new Order(rs.getInt("OrderNum"),rs.getString("store"),rs.getString("greeting"),rs.getString("status"),rs.getString("price"),
-							rs.getString("supplimentMethod"),rs.getString("supplimentTime"),rs.getString("supplimentDate"),rs.getTimestamp("OrderTime")));
-				}
-				
-				rs.close();
-
-				} catch (SQLException e) {
-			e.printStackTrace();
-				}
-
-			return orders;
-		}
-
 
 		public static ArrayList<String> GetStoreListForCEORevenueReports() {
 			// TODO Auto-generated method stub
@@ -815,9 +803,9 @@ public class Query {
 		public static void Update_Complaint_details(ArrayList<String> details) {
 			PreparedStatement stmt;
 			try {
-				stmt = DBConnect.conn.prepareStatement("UPDATE zerli_db.complaints SET status=? AND SET refund=? WHERE clientId=? ");
-				stmt.setString(1,details.get(2));
-				stmt.setString(2,details.get(1));
+				stmt = DBConnect.conn.prepareStatement("UPDATE zerli_db.complaints SET status=? , refund=? WHERE clientId=? ");
+				stmt.setString(1,details.get(1));
+				stmt.setString(2,details.get(2));
 				stmt.setString(3,details.get(0));
 				stmt.executeUpdate();
 
@@ -834,8 +822,45 @@ public class Query {
 			setCreditValue(details.get(0),String.valueOf(newCredit)) ;
 		}
 
+		public static void UpdateOrderCancel(ArrayList<String> details) {
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("INSERT INTO zerli_db.orders_cancel (clientID,OrderNum,Refund,Amount) VALUES(?,?,?,?)");
+				stmt.setString(1,details.get(0));
+				stmt.setString(2,details.get(1));
+				stmt.setString(3,details.get(2));
+				stmt.setInt(4,Integer.valueOf(details.get(3)));
+				stmt.executeUpdate();
 
-}
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			
+		}
+
+		public static void Update_refund_of_cancel_order(ArrayList<String> details) {
+			PreparedStatement stmt;
+			Integer amount = new Integer(0);
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT Amount FROM zerli_db.orders_cancel WHERE client_id = ? AND OrderNum = ?");
+				stmt.setString(1,details.get(0));
+				stmt.setString(2,details.get(2));
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()) {
+					amount =rs.getInt("Amount");
+				}
+				rs.close();
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			details.add(String.valueOf(amount));
+			Update_refund(details);
+			}
+			
+			
+		}
+		
+
 
 		
 

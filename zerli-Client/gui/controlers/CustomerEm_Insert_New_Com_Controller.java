@@ -43,7 +43,7 @@ public class CustomerEm_Insert_New_Com_Controller extends AbstractController imp
     }
 
     @FXML
-    void SendComplaint(ActionEvent event) {
+    void SendComplaint(ActionEvent event) throws IOException {
     	upLbl.setText("");
          this.ClientId=IdText.getText();
          ClientUI.chat.accept(new Message(MessageType.ClientExist,ClientId));
@@ -62,6 +62,7 @@ public class CustomerEm_Insert_New_Com_Controller extends AbstractController imp
         	 Com_details.add(Topic);
         	 Com_details.add("Not refund");	 
              ClientUI.chat.accept(new Message(MessageType.Upload_Complaint, Com_details));
+         	 stopPopUp(event);
          }
     }
 

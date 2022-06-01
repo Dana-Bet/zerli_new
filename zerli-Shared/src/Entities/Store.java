@@ -27,6 +27,6 @@ public class Store implements Serializable{
 	}
 	
 	public String toString() {
-		return this.city + " " + this.address; 
+		return this.storeCode+" "+this.city + " " + this.address; 
 	}
 }

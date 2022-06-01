@@ -69,7 +69,7 @@ import main.ClientUI;
 				} else {
 					StringBuilder str = new StringBuilder();
 					str.append(usernameTxt.getText());
-					str.append("@");
+					str.append("#");
 					str.append(passwordTxt.getText());
 					ClientUI.chat.accept(new Message(MessageType.userlogin, str.toString())); 
 					
@@ -86,7 +86,6 @@ import main.ClientUI;
 					}
 
 					case "Customer": {
-						System.out.println("working!");
 						start(event, "ClientMainPage", "Customer Screen", user.getFirstN());
 						break;
 					}

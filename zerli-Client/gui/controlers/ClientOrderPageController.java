@@ -157,7 +157,8 @@ public class ClientOrderPageController  extends AbstractController implements In
 	private void getStoreName(ActionEvent event) {
 	    this.UpLbl.setText("");
 	    this.UpLbl1.setText("");
-		this.choosingShop = this.shopDropDownMenu.getValue();
+	    String[] store = this.shopDropDownMenu.getValue().split(" ");
+     	this.choosingShop = store[0];
 	}
     
     @FXML

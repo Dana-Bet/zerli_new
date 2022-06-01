@@ -23,6 +23,7 @@ public class PopupCancelOrderController extends AbstractController implements In
     private String Refund;
     private String Userid;
     private String reason = "Customer want to cancel";
+    private double refundCalc;
 
     @FXML
     private Button cancelBtn;
@@ -47,6 +48,11 @@ public class PopupCancelOrderController extends AbstractController implements In
 		arr.add("There is a request to cancel");
 		arr.add(String.valueOf(OrderNumber));
 		ClientUI.chat.accept(new Message(MessageType.UpdateOrderStatus,arr));
+		arr.set(0, Userid);
+		int Amount = (int) (Float.valueOf(Price)*refundCalc); 
+		arr.add(Refund);
+		arr.add(String.valueOf(Amount));
+		ClientUI.chat.accept(new Message(MessageType.UpdateOrderCancel,arr));
 		stopPopUp(event);
     }
 
@@ -62,6 +68,7 @@ public class PopupCancelOrderController extends AbstractController implements In
 		case "Not refund":{
 			 msgLbl.setText("The time remaining to deliver your order is less then hour."
 			 		+ " If you choose to cancel this order you will pay a full amount.");
+			 refundCalc=0;
 			 msgLbl.setWrapText(true);
 			 break;
 	
@@ -69,12 +76,14 @@ public class PopupCancelOrderController extends AbstractController implements In
 		case "50% refund":{
 			 msgLbl.setText("The time remaining to deliver your order is between 1 and 3 hours."
 				 		+ " If you choose to cancel this order you will receive 50% of its cost as refund.");
+			 refundCalc=0.5;
 			 msgLbl.setWrapText(true);
 			 break;
 		}
 		case "refund all":{
 			 msgLbl.setText("The time remaining to deliver your order is more than 3 hours."
 				 		+ " If you choose to cancel this order you will receive 100% of its cost as refund.");
+			 refundCalc=1;
 			 msgLbl.setWrapText(true);
 			 break;
 		}		

@@ -32,6 +32,12 @@ import main.ClientUI;
         
 		public static ArrayList<Complaint> complaints ;
 		public static Complaint complaint;
+		@FXML
+		private ResourceBundle resources;
+
+		@FXML
+		private URL location;
+		
 	    @FXML
 	    private TableView<Complaint> table;
 
@@ -94,6 +100,7 @@ import main.ClientUI;
 	        calc_difference_In_Hours(complaint);
 	        if(complaint.getStatus().equals("Waiting for response")&& Math.abs(this.difference_In_Hours)>=24 && complaint.getAlert()!=1) {
 	        	startPopUp(event, "CustomerEm_DelayAlert", "","");
+               
 	        }
 	    }
 	    
@@ -114,7 +121,12 @@ import main.ClientUI;
 	        CustomerEmTableComplaintsScreenController.complaint = null;
 	        CustomerEmTableComplaintsScreenController.complaint = table.getSelectionModel().getSelectedItem();
 	        if(CustomerEmTableComplaintsScreenController.complaint!=null) {
-	        	startPopUp(event, "CustomerEm_Handeling_Cop_controller", "","");
+	        	if(CustomerEmTableComplaintsScreenController.complaint.getStatus().equals("Customer service responded")) {
+		        	UpLbl.setText("Customer Service has already replied to the complaint.");
+		        	return;
+	        	}
+	        	startPopUp(event, "CustomerEm_Handeling_Com", "","");
+                initialize(location, resources) ;
 	        }
 	        else {
 	        	UpLbl.setText("Please first select complaint from the table.");
@@ -127,6 +139,7 @@ import main.ClientUI;
 	    @FXML
 	    void InsertNewFunc(ActionEvent event) throws IOException {
 	    	startPopUp(event, "CustomerEm_Insert_Com", "","");
+            initialize(location, resources) ;
 	    }
 
 

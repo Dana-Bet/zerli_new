@@ -22,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientUI;
 
 public class ManagerOrdersController extends AbstractController implements Initializable {
-	public static ArrayList<Order> list; 
+	public static ArrayList<Order> listOfOrders ;
     private String Status;
     private int OrderNum;
     
@@ -69,7 +69,7 @@ public class ManagerOrdersController extends AbstractController implements Initi
     private Button CancelBtn;
 
     @FXML
-    private Button ComplaintBtn;
+    private Button ConfirmBtn;
     
     @FXML
     private Label upLbl;
@@ -83,16 +83,18 @@ public class ManagerOrdersController extends AbstractController implements Initi
         if(list!=null) {
         	Status=list.get(0).getStatus();
         	OrderNum=list.get(0).getOrderNumber();
-        	if(!Status.equals("There is a request to cancel")) {
+        	if(Status.equals("There is a request to cancel")) {
         		ArrayList<String> arr = new ArrayList<String>();
         		arr.add("canceled");
         		arr.add(String.valueOf(OrderNum));
         		ClientUI.chat.accept(new Message(MessageType.UpdateOrderStatus,arr));
+        		arr.set(0,list.get(0).getClientId());
+        		ClientUI.chat.accept(new Message(MessageType.UpdateCreditForClient,arr));
                 initialize(location, resources) ;
         	}
         	else 
         	{
-            	upLbl.setText("There  is no request to cancel!");
+            	upLbl.setText("This order already canceled");
             	return;
         	}
 
@@ -117,8 +119,8 @@ public class ManagerOrdersController extends AbstractController implements Initi
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	this.upLbl.setText("");
-		ClientUI.chat.accept(new Message(MessageType.Get_All_Order_by_Store,LoginScreenController.user.getHomeStore()));
-		ObservableList<Order> observableList = FXCollections.observableArrayList(list);
+		ClientUI.chat.accept(new Message(MessageType.Get_Orders_by_Store,LoginScreenController.user.getHomeStore()));
+		ObservableList<Order> observableList = FXCollections.observableArrayList(listOfOrders);
 		table.getItems().clear();
 		orderNumberCol.setCellValueFactory(new PropertyValueFactory<>("OrderNumber"));
 		storeCol.setCellValueFactory(new PropertyValueFactory<>("Store"));

@@ -24,7 +24,7 @@ public class ParsingServer {
 		
 		case userlogin: {
 			String result;
-			String[] DivededUandP = ((String) receivedMessage.getMessageData()).split("@");
+			String[] DivededUandP = ((String) receivedMessage.getMessageData()).split("#");
 			result = Query.Login(DivededUandP[0], DivededUandP[1]);
 			if (!result.equals("Already") && !result.equals("WrongInput") && !result.equals("Freeze")) {
 				LogicController.UpdateClientTable(msg, client);
@@ -145,10 +145,7 @@ public class ParsingServer {
 		//	ArrayList<Complaint> tableComplaints = (ArrayList<Complaint>) Query.getCmplaintsTable();
 			//return (new Message(MessageType.getTableComplaintsFromDB_succ,tableComplaints));
 		}
-		case setRefundToClient:{
-			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
-			Query.UpdateRefundToClient(details);
-		}
+
 		case GetStore:{
 			ArrayList<String> store = (ArrayList<String>)Query.getListOfStoreForCeo();
 			return (new Message(MessageType.getStore_succ,store)); 
@@ -180,6 +177,11 @@ public class ParsingServer {
 			ArrayList<Order> orders=Query.get_Orders_list(userId);
 			return (new Message(MessageType.Get_All_Order_by_id_succ,orders));
 		}
+		case Get_Orders_by_Store :{
+			String store = (String) receivedMessage.getMessageData();
+			ArrayList<Order> orders=Query.get_Orders_list_by_store(store);
+			return (new Message(MessageType.Get_Orders_by_Store_succ,orders));
+		}
 		case getRecipt :{
 			int orderNum = (int) receivedMessage.getMessageData();
 			ArrayList<String> Recipt = Query.getRecipt(orderNum);
@@ -191,10 +193,11 @@ public class ParsingServer {
 			Query.UpdateOrderSt(details);
 			return (new Message(MessageType.UpdateOrderStatus_succ,""));
 		}
-		case  Get_All_Order_by_Store :{
-			String ManagerStore = (String) receivedMessage.getMessageData();
-			ArrayList<Order> orders=Query.get_Orders_list_for_manager(ManagerStore);
-			return (new Message(MessageType.Get_All_Order_by_Store_succ,orders));
+		case UpdateOrderCancel:{
+			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
+			Query.UpdateOrderCancel(details);
+			return (new Message(MessageType.UpdateOrderCancel_succ,""));
+			
 		}
 		case  UpdateCompList:{
 			return (new Message(MessageType.UpdateCompList_succ,Query.getComplaints()));
@@ -229,6 +232,10 @@ public class ParsingServer {
 		case Update_refund:{
 			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
 			Query.Update_refund(details);
+		}
+		case UpdateCreditForClient:{
+			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
+			Query.Update_refund_of_cancel_order(details);
 		}
 		
 		default:

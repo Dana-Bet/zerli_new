@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-image: url('/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ManagerOrdersController">
+   <children>
+      <TableView fx:id="table" layoutX="52.0" layoutY="142.0" prefHeight="200.0" prefWidth="797.0">
+        <columns>
+          <TableColumn fx:id="orderNumberCol" prefWidth="63.99996566772461" text="Order No" />
+          <TableColumn fx:id="storeCol" prefWidth="56.800018310546875" text="Store" />
+            <TableColumn fx:id="priceCol" prefWidth="70.39999389648438" text="Price" />
+            <TableColumn fx:id="greetingCardCol" prefWidth="84.80000305175781" text="Greeting" />
+            <TableColumn fx:id="statusCol" prefWidth="56.00006103515625" text="Status" />
+            <TableColumn fx:id="DeliveryMethodCol" prefWidth="127.199951171875" text="Delivery method" />
+            <TableColumn fx:id="suppTimeCol" prefWidth="119.2000732421875" text="Suppliment time" />
+            <TableColumn fx:id="suppDateCol" prefWidth="110.39996337890625" text="Suppliment date" />
+            <TableColumn fx:id="OrderTimeCol" prefWidth="104.0001220703125" text="Order Time" />
+        </columns>
+      </TableView>
+      <Button fx:id="ConfirmBtn" layoutX="654.0" layoutY="360.0" mnemonicParsing="false" onAction="#ConfirmOrder" prefHeight="31.0" prefWidth="195.0" text="confirm">
+         <font>
+            <Font name="Yu Gothic UI Light" size="16.0" />
+         </font></Button>
+      <Button fx:id="CancelBtn" layoutX="654.0" layoutY="401.0" mnemonicParsing="false" onAction="#CancelSelectedOrder" prefHeight="31.0" prefWidth="195.0" text="cancel">
+         <font>
+            <Font name="Yu Gothic UI Light" size="16.0" />
+         </font></Button>
+      <Button fx:id="backBtn" layoutX="29.0" layoutY="534.0" mnemonicParsing="false" onAction="#backMainPage" prefHeight="43.0" prefWidth="112.0" text="back">
+         <font>
+            <Font name="Yu Gothic UI Light" size="16.0" />
+         </font></Button>
+      <Label alignment="CENTER" layoutX="577.0" layoutY="67.0" prefHeight="42.0" prefWidth="211.0" text="Store orders" textAlignment="CENTER">
+         <font>
+            <Font name="Yu Gothic Light" size="37.0" />
+         </font>
+      </Label>
+      <Label fx:id="upLbl" layoutX="107.0" layoutY="360.0" prefHeight="17.0" prefWidth="433.0" textFill="RED">
+         <font>
+            <Font size="13.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

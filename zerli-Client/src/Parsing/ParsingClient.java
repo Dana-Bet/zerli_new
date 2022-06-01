@@ -39,7 +39,7 @@ public class ParsingClient {
 		switch (receivedMessage.getMessageType()) {
 
 		case userlogin: {
-			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("@");
+			String[] DivedMsg = ((String) receivedMessage.getMessageData()).split("#");
 			if (!receivedMessage.getMessageData().equals("WrongInput")) {
 				if (receivedMessage.getMessageData().equals("Already")) {
 					LoginScreenController.statusUser = "The user is already logged in";
@@ -152,6 +152,10 @@ public class ParsingClient {
 			ClientOrdersController.list = (ArrayList<Order>) (receivedMessage.getMessageData());
 		    break;
 		}
+		case Get_Orders_by_Store_succ :{
+			ManagerOrdersController.listOfOrders = (ArrayList<Order>) (receivedMessage.getMessageData());
+		    break;
+		}
 		case getRecipt_succ:{
 			ClientOrdersController.recipt =  (ArrayList<String>)( receivedMessage.getMessageData());
 		    break;
@@ -169,10 +173,7 @@ public class ParsingClient {
 			CEOViewReportsOrdersController.reports = (ArrayList<OrdersReport>)(receivedMessage.getMessageData());
 			 break;
 		}
-		case Get_All_Order_by_Store:{
-			 ManagerOrdersController.list = (ArrayList<Order>) (receivedMessage.getMessageData());
-		    break;
-		}
+
 		case UpdateCompList_succ:{
 			CustomerEmTableComplaintsScreenController.complaints = (ArrayList<Complaint>) (receivedMessage.getMessageData());
 			break;
