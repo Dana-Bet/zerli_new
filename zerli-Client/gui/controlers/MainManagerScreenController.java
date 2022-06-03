@@ -81,7 +81,7 @@ public class MainManagerScreenController extends AbstractController implements  
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//HiUserLabel.setText("Hi "+LoginScreenController.user.getUserName());
+		HiUserLabel.setText("Hi "+LoginScreenController.user.getUserName());
 		
 	}
 

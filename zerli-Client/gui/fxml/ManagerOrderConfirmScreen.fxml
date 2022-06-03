@@ -9,17 +9,18 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-image: url('/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ManagerOrdersController">
    <children>
-      <TableView fx:id="table" layoutX="52.0" layoutY="142.0" prefHeight="200.0" prefWidth="797.0">
+      <TableView fx:id="table" layoutX="7.0" layoutY="142.0" prefHeight="200.0" prefWidth="888.0">
         <columns>
           <TableColumn fx:id="orderNumberCol" prefWidth="63.99996566772461" text="Order No" />
           <TableColumn fx:id="storeCol" prefWidth="56.800018310546875" text="Store" />
             <TableColumn fx:id="priceCol" prefWidth="70.39999389648438" text="Price" />
             <TableColumn fx:id="greetingCardCol" prefWidth="84.80000305175781" text="Greeting" />
-            <TableColumn fx:id="statusCol" prefWidth="56.00006103515625" text="Status" />
-            <TableColumn fx:id="DeliveryMethodCol" prefWidth="127.199951171875" text="Delivery method" />
-            <TableColumn fx:id="suppTimeCol" prefWidth="119.2000732421875" text="Suppliment time" />
-            <TableColumn fx:id="suppDateCol" prefWidth="110.39996337890625" text="Suppliment date" />
-            <TableColumn fx:id="OrderTimeCol" prefWidth="104.0001220703125" text="Order Time" />
+            <TableColumn fx:id="statusCol" prefWidth="87.0" text="Status" />
+            <TableColumn fx:id="DeliveryMethodCol" prefWidth="121.0" text="Delivery method" />
+            <TableColumn fx:id="suppTimeCol" minWidth="0.0" prefWidth="103.0" text="Suppliment time" />
+            <TableColumn fx:id="suppDateCol" prefWidth="126.0" text="Suppliment date" />
+            <TableColumn fx:id="OrderTimeCol" prefWidth="90.0" text="Order Time" />
+            <TableColumn fx:id="clientIdCol" prefWidth="79.0" text="Client ID" />
         </columns>
       </TableView>
       <Button fx:id="ConfirmBtn" layoutX="654.0" layoutY="360.0" mnemonicParsing="false" onAction="#ConfirmOrder" prefHeight="31.0" prefWidth="195.0" text="confirm">

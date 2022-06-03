@@ -75,7 +75,8 @@ public class ClientOrdersController extends AbstractController implements Initia
     
     @FXML
     private TableColumn<Order, String> statusCol;
-
+    @FXML
+    private TableColumn<Order, String> clientIdCol;
     @FXML
     private Button backBtn;
     

@@ -141,10 +141,6 @@ public class ParsingServer {
 			ArrayList<String> listID = (ArrayList<String>) Query.getIDFromComplaintDB();
 			return (new Message(MessageType.getIdFromComplaitnDB_succ,listID));
 		}
-		case ShowTableComlaintInDB:{
-		//	ArrayList<Complaint> tableComplaints = (ArrayList<Complaint>) Query.getCmplaintsTable();
-			//return (new Message(MessageType.getTableComplaintsFromDB_succ,tableComplaints));
-		}
 
 		case GetStore:{
 			ArrayList<String> store = (ArrayList<String>)Query.getListOfStoreForCeo();

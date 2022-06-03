@@ -542,7 +542,7 @@ public class Query {
 				stmt.setString(1,userId);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
-					orders.add(new Order(rs.getInt("OrderNum"),rs.getString("store"),rs.getString("greeting"),rs.getString("status"),rs.getString("price"),
+					orders.add(new Order(rs.getString("clientId"),rs.getInt("OrderNum"),rs.getString("store"),rs.getString("greeting"),rs.getString("status"),rs.getString("price"),
 							rs.getString("supplimentMethod"),rs.getString("supplimentTime"),rs.getString("supplimentDate"),rs.getTimestamp("OrderTime")));
 				}
 				
@@ -563,7 +563,7 @@ public class Query {
 				stmt.setString(1,store);
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
-					orders.add(new Order(rs.getInt("OrderNum"),rs.getString("store"),rs.getString("greeting"),rs.getString("status"),rs.getString("price"),
+					orders.add(new Order(rs.getString("clientId"),rs.getInt("OrderNum"),rs.getString("store"),rs.getString("greeting"),rs.getString("status"),rs.getString("price"),
 							rs.getString("supplimentMethod"),rs.getString("supplimentTime"),rs.getString("supplimentDate"),rs.getTimestamp("OrderTime")));
 				}
 				
@@ -842,9 +842,9 @@ public class Query {
 			PreparedStatement stmt;
 			Integer amount = new Integer(0);
 			try {
-				stmt = DBConnect.conn.prepareStatement("SELECT Amount FROM zerli_db.orders_cancel WHERE client_id = ? AND OrderNum = ?");
+				stmt = DBConnect.conn.prepareStatement("SELECT Amount FROM zerli_db.orders_cancel WHERE clientID = ? AND OrderNum = ?");
 				stmt.setString(1,details.get(0));
-				stmt.setString(2,details.get(2));
+				stmt.setString(2,details.get(1));
 				ResultSet rs = stmt.executeQuery();
 				while(rs.next()) {
 					amount =rs.getInt("Amount");

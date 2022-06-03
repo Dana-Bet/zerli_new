@@ -24,7 +24,7 @@ public class Order implements Serializable{
 	public Delivery delivery =null;
 
 
-	public Order(int OrderNumber,String store,String greetingCard,String Status,
+	public Order(String ClientId,int OrderNumber,String store,String greetingCard,String Status,
 			String price,String suppmethod,String suppTime,String suppDate,Timestamp timestamp)
 	{
 		this.orderNumber = OrderNumber;
@@ -36,9 +36,11 @@ public class Order implements Serializable{
 		this.suppDate = suppDate;
 		this.suppTime = suppTime;
 		this.orderTime = timestamp;
+		this.ClientId = ClientId;
+		
 	}
 	
-	
+
 	public Order(String greetingCard,String Status,
 			String store,String ClientId,String suppTime,String suppDate,String suppmethod)
 	{

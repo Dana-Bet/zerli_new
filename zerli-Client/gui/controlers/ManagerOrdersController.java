@@ -61,6 +61,9 @@ public class ManagerOrdersController extends AbstractController implements Initi
     
     @FXML
     private TableColumn<Order, String> statusCol;
+    
+    @FXML
+    private TableColumn<Order, String> clientIdCol;
 
     @FXML
     private Button backBtn;
@@ -78,23 +81,25 @@ public class ManagerOrdersController extends AbstractController implements Initi
     @FXML
     void CancelSelectedOrder(ActionEvent event) throws IOException {
     	upLbl.setText("");
-        ObservableList<Order> list;
-        list = this.table.getSelectionModel().getSelectedItems();
-        if(list!=null) {
-        	Status=list.get(0).getStatus();
-        	OrderNum=list.get(0).getOrderNumber();
+        Order order = null;
+        order = table.getSelectionModel().getSelectedItem();
+        if(order!=null) {
+        	Status=order.getStatus();
+        	OrderNum=order.getOrderNumber();
         	if(Status.equals("There is a request to cancel")) {
         		ArrayList<String> arr = new ArrayList<String>();
         		arr.add("canceled");
         		arr.add(String.valueOf(OrderNum));
         		ClientUI.chat.accept(new Message(MessageType.UpdateOrderStatus,arr));
-        		arr.set(0,list.get(0).getClientId());
+        		arr.clear();
+        		arr.add(order.getClientId());
+        		arr.add(String.valueOf(OrderNum));
         		ClientUI.chat.accept(new Message(MessageType.UpdateCreditForClient,arr));
                 initialize(location, resources) ;
         	}
         	else 
         	{
-            	upLbl.setText("This order already canceled");
+            	upLbl.setText("There is no cancel request for this order");
             	return;
         	}
 
@@ -108,7 +113,30 @@ public class ManagerOrdersController extends AbstractController implements Initi
 
     @FXML
     void ConfirmOrder(ActionEvent event) {
+    	upLbl.setText("");
+        Order order = null;
+        order = table.getSelectionModel().getSelectedItem();
+        if(order!=null) {
+        	Status=order.getStatus();
+        	OrderNum=order.getOrderNumber();
+        	if(Status.equals("Not confirm ")) {
+        		ArrayList<String> arr = new ArrayList<String>();
+        		arr.add("Confirm");
+        		arr.add(String.valueOf(OrderNum));
+        		ClientUI.chat.accept(new Message(MessageType.UpdateOrderStatus,arr));
+        	}
+        	else 
+        	{
+            	upLbl.setText("This order already confirmed");
+            	return;
+        	}
 
+       }
+        else 
+        {
+        	upLbl.setText("Please select order from the table.");
+        	return;
+        }
     }
     
     @FXML
@@ -131,6 +159,7 @@ public class ManagerOrdersController extends AbstractController implements Initi
 		suppTimeCol.setCellValueFactory(new PropertyValueFactory<>("SuppTime"));
 		suppDateCol.setCellValueFactory(new PropertyValueFactory<>("SuppDate"));
 		OrderTimeCol.setCellValueFactory(new PropertyValueFactory<>("OrderTime"));
+		clientIdCol.setCellValueFactory(new PropertyValueFactory<>("ClientId"));
 		table.setItems(observableList);	
 	}
 
