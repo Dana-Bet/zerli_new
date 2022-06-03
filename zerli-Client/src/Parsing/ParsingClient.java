@@ -22,6 +22,7 @@ import controlers.LoginScreenController;
 import controlers.ManagerAddAccountController;
 import controlers.ManagerFreezeController;
 import controlers.ManagerOrdersController;
+import controlers.ManagerSendEmailController;
 import controlers.ManagerViewReportsOrders;
 import controlers.ManagerViewReportsRevenueController;
 import controlers.UpdateItemsInCatalogController;
@@ -103,10 +104,7 @@ public class ParsingClient {
 			ManagerFreezeController.customerList =  (ArrayList<String>)(receivedMessage.getMessageData());
 		    break;
 		}
-		case getHomwStore_succ:{
-			ManagerFreezeController.homeStoreList = (ArrayList<String>)(receivedMessage.getMessageData());
-		    break;
-		}
+
 		case getNamesitems_succ:{
 			UpdateItemsInCatalogController.NamesproductList = (ArrayList<String>)(receivedMessage.getMessageData());
 		    break;
@@ -178,8 +176,17 @@ public class ParsingClient {
 			CustomerEmTableComplaintsScreenController.complaints = (ArrayList<Complaint>) (receivedMessage.getMessageData());
 			break;
 		}
+		case  RefundForClient_succ:{
+			ManagerOrdersController.ammount =  receivedMessage.getMessageData();
+			break;
+		}
 		case ClientExist_succ:{
 			CustomerEm_Insert_New_Com_Controller.ClientEx=!((ArrayList<String>) (receivedMessage.getMessageData())).isEmpty();
+			break;
+		}
+		case ClientEmailAndPhone_succ :{
+			 ManagerSendEmailController.email_phone = (ArrayList<String>) (receivedMessage.getMessageData());
+				break;
 		}
 
 		default:{

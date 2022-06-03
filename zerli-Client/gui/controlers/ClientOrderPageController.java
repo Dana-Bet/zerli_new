@@ -117,7 +117,7 @@ public class ClientOrderPageController  extends AbstractController implements In
     	}
     	createOrder();
     	order.delivery=this.delivery;
-    	start(event, "PaymentScreen", "Payment screen", "");
+    	start(event, "ClientPaymentScreen", "Payment screen", "");
     }
     
     private void createOrder() {

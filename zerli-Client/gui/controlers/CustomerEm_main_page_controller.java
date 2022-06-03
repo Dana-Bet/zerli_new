@@ -32,7 +32,7 @@ public class CustomerEm_main_page_controller extends AbstractController implemen
 
     @FXML
     void goComplaintTable(ActionEvent event) throws IOException {
-        start(event, "TableComplainScreen", "Table complaints Screen", "");
+        start(event, "CustomerEm_TableComplainScreen", "Table complaints Screen", "");
     }
 
     @FXML

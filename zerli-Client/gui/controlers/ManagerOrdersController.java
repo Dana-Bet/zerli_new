@@ -25,6 +25,7 @@ public class ManagerOrdersController extends AbstractController implements Initi
 	public static ArrayList<Order> listOfOrders ;
     private String Status;
     private int OrderNum;
+    public static Object ammount;
     
 	@FXML
 	private ResourceBundle resources;
@@ -88,13 +89,18 @@ public class ManagerOrdersController extends AbstractController implements Initi
         	OrderNum=order.getOrderNumber();
         	if(Status.equals("There is a request to cancel")) {
         		ArrayList<String> arr = new ArrayList<String>();
-        		arr.add("canceled");
+        		arr.add("Canceled");
         		arr.add(String.valueOf(OrderNum));
         		ClientUI.chat.accept(new Message(MessageType.UpdateOrderStatus,arr));
         		arr.clear();
         		arr.add(order.getClientId());
         		arr.add(String.valueOf(OrderNum));
         		ClientUI.chat.accept(new Message(MessageType.UpdateCreditForClient,arr));
+        		StringBuilder sendEmail = new StringBuilder();
+        		 sendEmail.append(order.getClientId());
+           		 sendEmail.append("#");
+           		 sendEmail.append("1");
+            	startPopUp(event, "ManagerSendEmail", "Send cancellation Email",sendEmail.toString());
                 initialize(location, resources) ;
         	}
         	else 
@@ -112,26 +118,45 @@ public class ManagerOrdersController extends AbstractController implements Initi
     }
 
     @FXML
-    void ConfirmOrder(ActionEvent event) {
+    void ConfirmOrder(ActionEvent event) throws IOException {
     	upLbl.setText("");
         Order order = null;
         order = table.getSelectionModel().getSelectedItem();
         if(order!=null) {
         	Status=order.getStatus();
         	OrderNum=order.getOrderNumber();
-        	if(Status.equals("Not confirm ")) {
+            
+        	switch(Status){
+        	
+        	case "Not confirm" :{
         		ArrayList<String> arr = new ArrayList<String>();
         		arr.add("Confirm");
         		arr.add(String.valueOf(OrderNum));
         		ClientUI.chat.accept(new Message(MessageType.UpdateOrderStatus,arr));
+        		StringBuilder sendEmail = new StringBuilder();
+        		sendEmail.append(order.getClientId());
+        		sendEmail.append("#");
+        		sendEmail.append("0");
+            	startPopUp(event, "ManagerSendEmail", "Send comfirmation Email",sendEmail.toString());
+                initialize(location, resources) ;
+        		break;
+        		
         	}
-        	else 
-        	{
+        	case "Confirm" :{
             	upLbl.setText("This order already confirmed");
             	return;
         	}
-
-       }
+        	case "Canceled" :{
+              	upLbl.setText("This order canceled");
+            	return;
+        	}
+        	case "There is a request to cancel":{
+              	upLbl.setText("This order requires cancellation");
+            	return;
+        	}
+        	
+        }
+        }
         else 
         {
         	upLbl.setText("Please select order from the table.");

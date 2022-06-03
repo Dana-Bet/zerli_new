@@ -325,7 +325,7 @@ public class Query {
 			Statement stmt;
 			try {
 				stmt = DBConnect.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT DISTINCT city FROM zerli_db.stores");
+				ResultSet rs = stmt.executeQuery("SELECT DISTINCT storeCode FROM zerli_db.stores");
 				storelist = new ArrayList<String>();
 				while (rs.next()) {
 					storelist.add(rs.getString(1));
@@ -838,7 +838,7 @@ public class Query {
 			
 		}
 
-		public static void Update_refund_of_cancel_order(ArrayList<String> details) {
+		public static Integer Update_refund_of_cancel_order(ArrayList<String> details) {
 			PreparedStatement stmt;
 			Integer amount = new Integer(0);
 			try {
@@ -855,10 +855,33 @@ public class Query {
 				}
 			details.add(String.valueOf(amount));
 			Update_refund(details);
+			return amount;
 			}
-			
+
+		public static ArrayList<String> getClientEmailAndPhone(String clientId) {
+			ArrayList<String> Email_Phone=new ArrayList<String>(); 
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("SELECT email,phone From zerli_db.users WHERE ID = ? ");
+				stmt.setString(1,clientId);
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					 Email_Phone.add(rs.getString("email"));
+					 Email_Phone.add(rs.getString("phone"));
+				}
+				rs.close();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+
+			return  Email_Phone;
 			
 		}
+}
+			
+			
+
 		
 
 

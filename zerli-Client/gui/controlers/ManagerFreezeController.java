@@ -40,23 +40,26 @@ public class ManagerFreezeController extends AbstractController implements  Init
     @FXML
     private ComboBox<String> homeStroeBtn;
     @FXML
-    private Button storeBtn;
+    private Label upLbl;
+
     
     public static ArrayList<String> customerList;
-    public static ArrayList<String> homeStoreList;
+
     String customer;
 
-    @FXML
-    void chooseStore(ActionEvent event) {
-    	String store = homeStroeBtn.getValue();
-		ClientUI.chat.accept(new Message(MessageType.getCustomerToFreeze,store));
-		ObservableList<String> observableList1 = FXCollections.observableArrayList(customerList);
-		customerName.setItems(observableList1);
-    }
+
     @FXML
     void Freeze(ActionEvent event) {
+	    	this.upLbl.setText("");
     		customer = customerName.getValue();
-    		ClientUI.chat.accept(new Message(MessageType.customerFreeze,customer));
+    		if(customer==null || customer.isEmpty()) {
+    			this.upLbl.setText("Please select user to frezze.");
+    			return;
+    		}
+    		else {
+        		ClientUI.chat.accept(new Message(MessageType.customerFreeze,customer));
+    		}
+
     }
     @FXML
 		void back(ActionEvent event) throws IOException {
@@ -65,9 +68,13 @@ public class ManagerFreezeController extends AbstractController implements  Init
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ClientUI.chat.accept(new Message(MessageType.getHomeStore,null));
-		ObservableList<String> observableList2 = FXCollections.observableArrayList(homeStoreList);
-		homeStroeBtn.setItems(observableList2);
+    	this.upLbl.setText("");
+          this.homeStroeBtn.setValue(LoginScreenController.user.getHomeStore());
+          this.homeStroeBtn.setDisable(true);
+          String store = homeStroeBtn.getValue();
+  		  ClientUI.chat.accept(new Message(MessageType.getCustomerToFreeze,store));
+  		  ObservableList<String> observableList1 = FXCollections.observableArrayList(customerList);
+  		  customerName.setItems(observableList1);
 	}
 
 	@Override

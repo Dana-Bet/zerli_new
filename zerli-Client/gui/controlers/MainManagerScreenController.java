@@ -46,22 +46,22 @@ public class MainManagerScreenController extends AbstractController implements  
 
     @FXML
     void AddAccount(ActionEvent event) throws IOException {
-    	start(event,"newAccountScreen","Open New Account",LoginScreenController.user.getFirstN());
+    	start(event,"ManagerOpenNewAccount","Open New Account",LoginScreenController.user.getFirstN());
     }
 
     @FXML
     void FreezeAccount(ActionEvent event) throws IOException {
-    	start(event,"FreezeAccount","View Orders Report","");
+    	start(event,"ManagerFreezeAccount","View Orders Report","");
     }
 
     @FXML
     void ViewStoreReports(ActionEvent event) throws IOException {
-    	start(event,"ViewReportRevenue","View revenue Report","");
+    	start(event,"ManagerViewRevenueReport","View revenue Report","");
     }
 
     @FXML
     void ViewStoreReportsOrders(ActionEvent event) throws IOException {
-    	start(event,"ViewReportOrders","View Orders Report","");
+    	start(event,"ManagerViewOrdersReport","View Orders Report","");
     }
 
     @FXML

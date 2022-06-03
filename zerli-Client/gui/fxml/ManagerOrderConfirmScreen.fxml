@@ -40,7 +40,7 @@
             <Font name="Yu Gothic Light" size="37.0" />
          </font>
       </Label>
-      <Label fx:id="upLbl" layoutX="107.0" layoutY="360.0" prefHeight="17.0" prefWidth="433.0" textFill="RED">
+      <Label fx:id="upLbl" layoutX="290.0" layoutY="369.0" prefHeight="19.0" prefWidth="336.0" textFill="RED">
          <font>
             <Font size="13.0" />
          </font></Label>

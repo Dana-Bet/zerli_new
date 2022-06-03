@@ -78,10 +78,7 @@ public class ParsingServer {
 			String customerToFreeze = (String)(receivedMessage.getMessageData());
 			Query.FreezeCustomer(customerToFreeze);
 		}
-		case getHomeStore:{
-			ArrayList<String> storelist = (ArrayList<String>) Query.getstorelist();
-			return (new Message(MessageType.getHomwStore_succ,storelist));
-		}
+
 		case getTypeNames:{
 			String type = (String) receivedMessage.getMessageData();
 			ArrayList<String> Namelist = (ArrayList<String>) Query.getNamesList(type);
@@ -231,7 +228,11 @@ public class ParsingServer {
 		}
 		case UpdateCreditForClient:{
 			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
-			Query.Update_refund_of_cancel_order(details);
+			return (new Message(MessageType.RefundForClient_succ,Query.Update_refund_of_cancel_order(details)));
+		}
+		case getClientEmailAndPhone:{
+			String clientId = (String)(receivedMessage.getMessageData());
+			return (new Message(MessageType.ClientEmailAndPhone_succ,Query.getClientEmailAndPhone(clientId)));
 		}
 		
 		default:

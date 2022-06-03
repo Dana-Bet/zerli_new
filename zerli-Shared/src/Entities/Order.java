@@ -87,7 +87,8 @@ public class Order implements Serializable{
 	}
 
 	public String getStore() {
-		return store;
+		String[] s = store.split(" ");
+		return s[0];
 	}
 
 	public String getClientId() {
