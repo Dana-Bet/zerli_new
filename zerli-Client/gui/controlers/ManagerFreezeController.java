@@ -63,7 +63,7 @@ public class ManagerFreezeController extends AbstractController implements  Init
     }
     @FXML
 		void back(ActionEvent event) throws IOException {
-			start(event,"MainManagerScreen","Branch Manager", LoginScreenController.user.getFirstN());
+			start(event,"ManagerMainPageScreen","Branch Manager", LoginScreenController.user.getFirstN());
 		}
 	
 	@Override

@@ -51,7 +51,7 @@ public class ClientCreateOrderController extends AbstractController   {
 	public void display(String string) {
 		CartBtn.setStyle("-fx-background-color: transparent;");
 		CartBtn.setGraphic(cartImage);
-		this.NumberOfProductLbl.setText(CartScreenController.cart.getNumberOfItems().toString());
+		this.NumberOfProductLbl.setText(ClientCartScreenController.cart.getNumberOfItems().toString());
 		
 	}
 

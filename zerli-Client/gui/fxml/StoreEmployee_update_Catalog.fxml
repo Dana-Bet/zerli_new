@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: url('/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.StoreEmployee_UpdateCatalogController">
+   <children>
+      <Label fx:id="updateCatalog" layoutX="413.0" layoutY="110.0" prefHeight="80.0" prefWidth="320.0" text="Update Catalog">
+         <font>
+            <Font name="Yu Gothic UI Light" size="48.0" />
+         </font>
+      </Label>
+      <Button fx:id="updatePriceBtn" layoutX="442.0" layoutY="235.0" mnemonicParsing="false" onAction="#updatePrice" prefHeight="41.0" prefWidth="260.0" text="Update price of product">
+         <font>
+            <Font name="Yu Gothic Light" size="18.0" />
+         </font></Button>
+      <Button fx:id="updateQuantityBtn" layoutX="442.0" layoutY="300.0" mnemonicParsing="false" onAction="#Update_Quan" prefHeight="41.0" prefWidth="260.0" text="Update quantity">
+         <font>
+            <Font name="Yu Gothic Light" size="18.0" />
+         </font></Button>
+      <Button fx:id="backBtn" layoutX="27.0" layoutY="532.0" mnemonicParsing="false" onAction="#backToMain" opacity="0.74" prefHeight="40.0" prefWidth="125.0" text="Back">
+         <font>
+            <Font name="Yu Gothic UI Light" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

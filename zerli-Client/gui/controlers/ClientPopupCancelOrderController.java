@@ -17,7 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import main.ClientUI;
 
-public class PopupCancelOrderController extends AbstractController implements Initializable {
+public class ClientPopupCancelOrderController extends AbstractController implements Initializable {
     private String  OrderNumber;
     private String Price;
     private String Refund;

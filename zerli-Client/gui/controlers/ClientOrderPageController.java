@@ -305,7 +305,7 @@ public class ClientOrderPageController  extends AbstractController implements In
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		TotalPrice = CartScreenController.cart.OrderTotalPrice();
+		TotalPrice = ClientCartScreenController.cart.OrderTotalPrice();
 		ClientOrderPageController.storesList = new ArrayList <Store>();
 		this.storesNames = new ArrayList <String>();
 		ClientUI.chat.accept(new Message(MessageType.InitialShopsList,""));

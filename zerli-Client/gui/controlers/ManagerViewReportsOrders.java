@@ -59,24 +59,29 @@ public class ManagerViewReportsOrders extends AbstractController implements Init
 	    public static String type;
 	    public static ArrayList<String> details = new ArrayList<String>();
 		public static ArrayList<OrdersReport> productTypeOrders =  new ArrayList<OrdersReport>();
+		
+		
 	    @FXML
 	    void ShowOrdersReport(ActionEvent event) {
 	    	 details.add(productTypeBtn.getValue());
 	    	 details.add(LoginScreenController.user.getHomeStore());
 	    	ClientUI.chat.accept(new Message(MessageType.getTypeOrders,details));
-	    	ObservableList<OrdersReport> observableList3 = FXCollections.observableArrayList(productTypeOrders);
-	    	monthcol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("month"));
-	    	yearcol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("year"));
-	    	storecol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("store"));
-	    	Quantitycol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("Quantity"));
-	    	System.out.println(productTypeOrders);
-	    	table.setItems(observableList3);
+		    ObservableList<OrdersReport> observableList3 = FXCollections.observableArrayList(productTypeOrders);
+		    monthcol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("Month"));
+		    yearcol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("Year"));
+		    storecol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("Store"));
+		    Quantitycol.setCellValueFactory(new PropertyValueFactory<OrdersReport, String>("Quantity"));
+		    System.out.println(productTypeOrders);
+		    table.setItems(observableList3);
+		    details.clear();
+	    		
+	    	
 	    	
 	    }
 	    
 	    @FXML
 		void back(ActionEvent event) throws IOException {
-			start(event,"MainManagerScreen","Branch Manager", LoginScreenController.user.getFirstN());
+			start(event,"ManagerMainPageScreen","Branch Manager", LoginScreenController.user.getFirstN());
 		}
 	    
 	@Override

@@ -76,9 +76,6 @@ public class ManagerAddAccountController extends AbstractController implements I
     private Label updateLbl;
     
     @FXML
-    private Label userNamelbl;
-
-    @FXML
     private Label passwordLbl;
 
     @FXML
@@ -92,7 +89,7 @@ public class ManagerAddAccountController extends AbstractController implements I
 	
 	@FXML
 	void back(ActionEvent event) throws IOException {
-		start(event,"MainManagerScreen","Branch Manager", LoginScreenController.user.getFirstN());
+		start(event,"ManagerMainPageScreen","Branch Manager", LoginScreenController.user.getFirstN());
 	}
     
     @FXML
@@ -121,7 +118,7 @@ public class ManagerAddAccountController extends AbstractController implements I
 	
 	@Override
 	public void display(String string) {
-		userName.setText(LoginScreenController.user.getFirstN() + " " + LoginScreenController.user.getLastN());		
+		
 	}
 
 	@Override

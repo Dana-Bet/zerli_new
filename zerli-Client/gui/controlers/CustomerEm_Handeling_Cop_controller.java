@@ -58,7 +58,6 @@ public class CustomerEm_Handeling_Cop_controller  extends AbstractController imp
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		System.out.println("nnnn");
 		if( CustomerEmTableComplaintsScreenController.complaint.getAlert()==1) {
 			this.upLbl.setText("Its recommended to compensate that client because he waited a long time for the response.");
 		}

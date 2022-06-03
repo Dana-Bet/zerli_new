@@ -166,7 +166,7 @@ public class ManagerOrdersController extends AbstractController implements Initi
     
     @FXML
     void backMainPage(ActionEvent event) throws IOException {
-    	start(event, "MainManagerScreen", "Customer Screen", "");
+    	start(event, "ManagerMainPageScreen", "Customer Screen", "");
     }
     
 	@Override

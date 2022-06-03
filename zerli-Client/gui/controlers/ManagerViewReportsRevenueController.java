@@ -66,14 +66,14 @@ public class ManagerViewReportsRevenueController extends AbstractController impl
 	public static boolean ViewReportsRevenueFlag;
     @FXML
     void ShowRevenueReport(ActionEvent event) {
-    	details.add(LoginScreenController.user.getId());
+    	details.add(LoginScreenController.user.getHomeStore());
     	details.add(yearComboBox.getValue());                                     
     	details.add(monthComboBox.getValue());
     	ClientUI.chat.accept(new Message(MessageType.getRevenueReports,details));
     	ObservableList<RevenueReport> observableList3 = FXCollections.observableArrayList(revenue);
-    	tableColumnincome.setCellValueFactory(new PropertyValueFactory<RevenueReport, String>("income"));
+    	tableColumnincome.setCellValueFactory(new PropertyValueFactory<RevenueReport, String>("Income"));
     	tableColumnquarterly.setCellValueFactory(new PropertyValueFactory<RevenueReport, String>("Quarterly"));
-    	tableColumnordersAmount.setCellValueFactory(new PropertyValueFactory<RevenueReport, String>("ordersamount"));
+    	tableColumnordersAmount.setCellValueFactory(new PropertyValueFactory<RevenueReport, String>("Ordersamount"));
     	System.out.println(revenue);
     	table.setItems(observableList3);
     	
@@ -81,7 +81,7 @@ public class ManagerViewReportsRevenueController extends AbstractController impl
 
 	@FXML
 	void back(ActionEvent event) throws IOException {
-		start(event,"MainManagerScreen","Branch Manager", LoginScreenController.user.getFirstN());
+		start(event,"ManagerMainPageScreen","Branch Manager", LoginScreenController.user.getFirstN());
 	}
  
     ////ksksksnnnnn

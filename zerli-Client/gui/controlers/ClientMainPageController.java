@@ -78,7 +78,7 @@ public class ClientMainPageController extends AbstractController implements Init
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		this.NumberOfProductLbl.setText(CartScreenController.cart.getNumberOfItems().toString());
+		this.NumberOfProductLbl.setText(ClientCartScreenController.cart.getNumberOfItems().toString());
 		CartBtn.setStyle("-fx-background-color: transparent;");
 		CartBtn.setGraphic(cartImage);
 	}

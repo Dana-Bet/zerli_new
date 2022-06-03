@@ -26,7 +26,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientUI;
 
-public class ClientOrdersController extends AbstractController implements Initializable {
+public class ClientOrdersTableController extends AbstractController implements Initializable {
 	public static ArrayList<Order> list; 
 	public static ArrayList<String> recipt=null;
     private Timestamp OrderTime;
@@ -198,7 +198,7 @@ public class ClientOrdersController extends AbstractController implements Initia
     
     private void updateTextRecipt() {
     	this.ViewRecipt.clear();
-    	for (String s : ClientOrdersController.recipt ) {
+    	for (String s : ClientOrdersTableController.recipt ) {
     		this.ViewRecipt.appendText(s);
     		this.ViewRecipt.appendText("\n");
     	}

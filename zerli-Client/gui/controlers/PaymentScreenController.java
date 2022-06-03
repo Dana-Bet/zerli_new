@@ -124,14 +124,14 @@ public class PaymentScreenController extends AbstractController implements Initi
 		}	
 		
 		ClientOrderPageController.addDetailsToRecipt.append("Final price = "+TotalPrice+" $");
-		CartScreenController.cart.CreateRecipt();
-		CartScreenController.cart.addToRecipt(ClientOrderPageController.addDetailsToRecipt.toString());
+		ClientCartScreenController.cart.CreateRecipt();
+		ClientCartScreenController.cart.addToRecipt(ClientOrderPageController.addDetailsToRecipt.toString());
 		
 		UpdateOrderInDB();
 		updateReciptInDB();
 		
-		CartScreenController.cart.Order_Components.clear();
-		CartScreenController.cart.setNumberOfItems();
+		ClientCartScreenController.cart.Order_Components.clear();
+		ClientCartScreenController.cart.setNumberOfItems();
 		start(event, "ClientMainPage", "Main page", "");
 
     }
@@ -139,10 +139,10 @@ public class PaymentScreenController extends AbstractController implements Initi
     private void updateReciptInDB() {
 
     	StringBuilder str = new StringBuilder();
-    	System.out.println(CartScreenController.cart.Recipt);
+    	System.out.println(ClientCartScreenController.cart.Recipt);
 		str.append(OrderNum);
 		str.append("@");
-		str.append(CartScreenController.cart.Recipt);		
+		str.append(ClientCartScreenController.cart.Recipt);		
         ClientUI.chat.accept(new Message(MessageType.Add_Recipt,str.toString()));
 		
 	}

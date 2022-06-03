@@ -13,11 +13,11 @@ import Entities.RevenueReport;
 import Entities.Store;
 import Entities.User;
 import controlers.CEOViewReportsOrdersController;
-import controlers.CartScreenController;
+import controlers.ClientCartScreenController;
 import controlers.ClientAssemblyProductController;
 import controlers.ClientCatalogController;
 import controlers.ClientOrderPageController;
-import controlers.ClientOrdersController;
+import controlers.ClientOrdersTableController;
 import controlers.LoginScreenController;
 import controlers.ManagerAddAccountController;
 import controlers.ManagerFreezeController;
@@ -25,8 +25,8 @@ import controlers.ManagerOrdersController;
 import controlers.ManagerSendEmailController;
 import controlers.ManagerViewReportsOrders;
 import controlers.ManagerViewReportsRevenueController;
-import controlers.UpdateItemsInCatalogController;
 import controlers.PaymentScreenController;
+import controlers.StoreEmployee_update_Item_controller;
 import controlers.CustomerEmTableComplaintsScreenController;
 import controlers.CustomerEm_Insert_New_Com_Controller;
 
@@ -53,7 +53,7 @@ public class ParsingClient {
 						LoginScreenController.user = new User(DivedMsg[0], DivedMsg[1], DivedMsg[2], DivedMsg[3],
 								DivedMsg[4], DivedMsg[5], DivedMsg[6],DivedMsg[7],DivedMsg[8],DivedMsg[9]);
 						LoginScreenController.statusUser = "Active";
-						CartScreenController.cart = new ClientCart();
+						ClientCartScreenController.cart = new ClientCart();
 					}
 				}
 			} else {
@@ -105,14 +105,6 @@ public class ParsingClient {
 		    break;
 		}
 
-		case getNamesitems_succ:{
-			UpdateItemsInCatalogController.NamesproductList = (ArrayList<String>)(receivedMessage.getMessageData());
-		    break;
-		}
-		case getTypeProductForCatalog_succ:{
-			UpdateItemsInCatalogController.productType1 = (ArrayList<String>)(receivedMessage.getMessageData());
-		    break;
-		}
 		case InitialShopsList_succ :{
 			ArrayList<Store> stores= new ArrayList<>();
 			stores = (ArrayList<Store>) (receivedMessage.getMessageData());
@@ -147,7 +139,7 @@ public class ParsingClient {
 		    break;
 		}
 		case Get_All_Order_by_id_succ:{///+++
-			ClientOrdersController.list = (ArrayList<Order>) (receivedMessage.getMessageData());
+			ClientOrdersTableController.list = (ArrayList<Order>) (receivedMessage.getMessageData());
 		    break;
 		}
 		case Get_Orders_by_Store_succ :{
@@ -155,7 +147,7 @@ public class ParsingClient {
 		    break;
 		}
 		case getRecipt_succ:{
-			ClientOrdersController.recipt =  (ArrayList<String>)( receivedMessage.getMessageData());
+			ClientOrdersTableController.recipt =  (ArrayList<String>)( receivedMessage.getMessageData());
 		    break;
 
 		}
@@ -187,6 +179,10 @@ public class ParsingClient {
 		case ClientEmailAndPhone_succ :{
 			 ManagerSendEmailController.email_phone = (ArrayList<String>) (receivedMessage.getMessageData());
 				break;
+		}
+		case Get_All_Items_In_Catalog_succ :{
+			 StoreEmployee_update_Item_controller.All_Items_In_Catalog =(ArrayList<Item_In_Catalog>) (receivedMessage.getMessageData());
+			 break;
 		}
 
 		default:{

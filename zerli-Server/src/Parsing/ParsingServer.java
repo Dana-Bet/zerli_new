@@ -64,8 +64,8 @@ public class ParsingServer {
 			return (new Message(MessageType.getTypeProduct_succ,productype));
 		}
 		case getTypeOrders:{
-			String type = (String) receivedMessage.getMessageData();
-			ArrayList<OrdersReport> typeOrders = Query.getTypeOrders(type);
+			ArrayList<String> details = (ArrayList<String>) receivedMessage.getMessageData();
+			ArrayList<OrdersReport> typeOrders = Query.getTypeOrders(details);
 			return (new Message(MessageType.getTypeProductOrders_succ,typeOrders));
 		}
 		case getCustomerToFreeze:{
@@ -233,6 +233,9 @@ public class ParsingServer {
 		case getClientEmailAndPhone:{
 			String clientId = (String)(receivedMessage.getMessageData());
 			return (new Message(MessageType.ClientEmailAndPhone_succ,Query.getClientEmailAndPhone(clientId)));
+		}
+		case Get_All_Items_In_Catalog :{
+			return (new Message(MessageType.Get_All_Items_In_Catalog_succ,Query.get_All_Catalog()));
 		}
 		
 		default:

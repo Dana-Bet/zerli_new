@@ -215,7 +215,7 @@ public class Query {
 			PreparedStatement stmt;
 			try {
 				if (DBConnect.conn != null) {
-					stmt = DBConnect.conn.prepareStatement("SELECT * FROM zerli_db.revenue_reports WHERE id=? AND year=? AND month=?");
+					stmt = DBConnect.conn.prepareStatement("SELECT * FROM zerli_db.revenue_reports WHERE store=? AND year=? AND month=?");
 					stmt.setString(1,details.get(0)); //id
 					stmt.setString(2, details.get(1)); //year
 					stmt.setString(3,details.get(2)); //month
@@ -260,13 +260,14 @@ public class Query {
 			
 		}
 
-		public static ArrayList<OrdersReport> getTypeOrders(String type1) {
+		public static ArrayList<OrdersReport> getTypeOrders(ArrayList<String> details) {
 			ArrayList<OrdersReport> orders = new ArrayList<>();
 			PreparedStatement stmt;
 			try {
 				if (DBConnect.conn != null) {
-					stmt = DBConnect.conn.prepareStatement("SELECT * FROM zerli_db.orders_report WHERE type=?");
-					stmt.setString(1,type1); //id
+					stmt = DBConnect.conn.prepareStatement("SELECT * FROM zerli_db.orders_report WHERE type=? AND store =?");
+					stmt.setString(1,details.get(0)); 
+					stmt.setString(2,details.get(1)); 
 					ResultSet rs = stmt.executeQuery();
 					while (rs.next()) {
 						String month = rs.getString("month");
@@ -274,7 +275,7 @@ public class Query {
 						String store = rs.getString("store");
 						String Quantity = rs.getString("Quantity");
 						String type = rs.getString("type");
-						orders.add(new OrdersReport(store,month,year,Quantity,type));
+						orders.add(new OrdersReport(month,year,store,Quantity,type));
 					}
 					rs.close();
 				} else {
@@ -358,10 +359,10 @@ public class Query {
 		public static ArrayList<String> setDetailsInItem(ArrayList<String> details) {
 			PreparedStatement stmt;
 			try {
-		    	stmt = DBConnect.conn.prepareStatement("UPDATE zerli_db.users SET price=? WHERE type=? AND name=?");
-		    	stmt.setString(1,details.get(0));
-		    	stmt.setString(1,details.get(1));
-		    	stmt.setString(1,details.get(2));
+		    	stmt = DBConnect.conn.prepareStatement("UPDATE zerli_db.item_in_catalog SET price=? WHERE type=? AND name=?");
+		    	stmt.setFloat(1,Float.valueOf(details.get(0)));
+		    	stmt.setString(2,details.get(1));
+		    	stmt.setString(3,details.get(2));
 			    stmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -877,6 +878,30 @@ public class Query {
 
 			return  Email_Phone;
 			
+		}
+
+		public static Object get_All_Catalog() {
+			ArrayList<Item_In_Catalog> Catalog= new ArrayList<>();
+			PreparedStatement stmt;
+			try {
+				if (DBConnect.conn != null) {
+					stmt = DBConnect.conn
+							.prepareStatement("SELECT * FROM zerli_db.item_in_catalog WHERE price > 0 ");
+					ResultSet rs = stmt.executeQuery();
+					while (rs.next()) {
+						Item_In_Catalog Item = new Item_In_Catalog(rs.getInt("id"), rs.getString("color"),
+								rs.getString("name"), rs.getString("type"), rs.getFloat("price"),
+								rs.getString("assembleItem"));
+						Catalog.add(Item);
+					}
+					rs.close();
+				} else {
+					System.out.println("Conn is null");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return Catalog;
 		}
 }
 			

@@ -118,7 +118,7 @@ public class ClientCatalogController extends AbstractController implements Initi
     private void updateslbl() {
     	TotalPriceLbl.setText("Price : "+cart.getTotalPrice(itemId).toString()+"$");
  	    QuanLbl.setText(cart.getQuanOfProInCart(itemId).toString());
- 	    this.NumberOfProductLbl.setText(CartScreenController.cart.getNumberOfItems().toString());
+ 	    this.NumberOfProductLbl.setText(ClientCartScreenController.cart.getNumberOfItems().toString());
     }
     	
     
@@ -233,10 +233,10 @@ public class ClientCatalogController extends AbstractController implements Initi
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ClientUI.chat.accept(new Message(MessageType.Initialize_Catalog,"0"));
 		ClientUI.chat.accept(new Message(MessageType.Initialize_Catalog,"1"));
-		this.cart = CartScreenController.cart;
+		this.cart = ClientCartScreenController.cart;
 		setSelection();
     	this.listOfProduct.setDisable(true);
-		this.NumberOfProductLbl.setText(CartScreenController.cart.getNumberOfItems().toString());
+		this.NumberOfProductLbl.setText(ClientCartScreenController.cart.getNumberOfItems().toString());
 		CartBtn.setStyle("-fx-background-color: transparent;");
 		CartBtn.setGraphic(cartImage);
     	UpdateTypeProLabel.setText("<--Choose category");

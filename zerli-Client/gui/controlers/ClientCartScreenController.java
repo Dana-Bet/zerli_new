@@ -24,7 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientUI;
 
 //areaa
-public class CartScreenController extends AbstractController implements Initializable {
+public class ClientCartScreenController extends AbstractController implements Initializable {
 	public static ClientCart cart;
 	ArrayList<LineInCartTable> l ;
 	ObservableList<LineInCartTable> observableList;

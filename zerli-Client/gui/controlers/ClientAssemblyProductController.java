@@ -104,16 +104,16 @@ public class ClientAssemblyProductController extends AbstractController implemen
 		@FXML
 	    void AddProductToCart(ActionEvent event) {
 	    	if (AProduct!=null && this.item!=null) {
-	    	if(CartScreenController.cart.Order_Components.containsKey(AProduct.getId())){AProduct.setId(AProduct.getId()+1);} //other id
+	    	if(ClientCartScreenController.cart.Order_Components.containsKey(AProduct.getId())){AProduct.setId(AProduct.getId()+1);} //other id
 	    	setSelection();
 	    	assembledProduct Temp = new assembledProduct(AProduct.getId(),AProduct.getName(),AProduct.getType(),AProduct.isAssembleItem());
 	    	Temp.Product_components_map = AProduct.Product_components_map;		
-	    	CartScreenController.cart.AddToCart(Temp);
+	    	ClientCartScreenController.cart.AddToCart(Temp);
 	    	FlowerPot.setSelected(false);
 			Bouquet.setSelected(false);
 			Flowercluster.setSelected(false);
 			ProductComponent.clear();
-			this.NumberOfProductLbl.setText(CartScreenController.cart.getNumberOfItems().toString());
+			this.NumberOfProductLbl.setText(ClientCartScreenController.cart.getNumberOfItems().toString());
 			this.initialize(location,resources);
 	    	}
          }
@@ -259,7 +259,7 @@ public class ClientAssemblyProductController extends AbstractController implemen
             productPriceLbl.setText("");
             productColorLbl.setText("");
             this.productImage.setImage(null);
-			this.NumberOfProductLbl.setText(CartScreenController.cart.getNumberOfItems().toString());
+			this.NumberOfProductLbl.setText(ClientCartScreenController.cart.getNumberOfItems().toString());
 			
 			CartBtn.setStyle("-fx-background-color: transparent;");
 			CartBtn.setGraphic(cartImage);

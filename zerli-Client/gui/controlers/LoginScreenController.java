@@ -105,8 +105,15 @@ import main.ClientUI;
 						break;
 
 					}
+					case "StoreEmployee": {
+						start(event, "StoreEmployeeMainPage", "ServiceSpecialist", user.getFirstN());
+						break;
 				  }
-				}		
+				 }
+				}
+				  
+				  
+					
 			}
 
 			@Override
