@@ -1,9 +1,13 @@
 package main;
 // This file contains material supporting section 3.7 of the textbook:
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-
 import Entities.Message;
+import Entities.MyFile;
 import Parsing.ParsingServer;
 import controllers.ServerUIFController;
 import ocsf.server.AbstractServer;
@@ -39,6 +43,32 @@ public class EchoServer extends AbstractServer {
 			e.printStackTrace();
 		}
 }
+	
+	public void handleMessageFromClientUpFile(Object msg, ConnectionToClient client) {
+		int fileSize = ((MyFile) msg).getSize();
+		
+		File newFile = new File(((MyFile)msg).getFileName() + ".PDF");
+
+		byte[] mybytearray = new byte[(int) newFile.length()];
+		FileOutputStream fos;
+		try {
+			fos = new FileOutputStream(newFile);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return;
+		}
+		BufferedOutputStream bos = new BufferedOutputStream(fos);
+
+		try {
+			bos.write(((MyFile)msg).getMybytearray(), 0, mybytearray.length);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Message received: " + ((MyFile)msg).getFileName() + " from " + client);
+		System.out.println("length " + fileSize);
+	}
 
 	// Class methods ***************************************************
 

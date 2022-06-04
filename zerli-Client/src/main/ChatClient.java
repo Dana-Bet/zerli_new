@@ -4,9 +4,13 @@
 
 package main;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import Entities.Message;
+import Entities.MyFile;
 import Entities.Order;
 import Parsing.ParsingClient;
 import javafx.scene.control.Alert;
@@ -57,7 +61,30 @@ public class ChatClient extends AbstractClient
 			errorAlert.showAndWait();
 		}
 	}
-  
+	
+	//for pdf
+	public void handleMessageFromClientUI(String message) {
+		  MyFile msg= new MyFile("diagnosisE.PDF");
+		  String LocalfilePath="diagnosisE.PDF";
+			
+		  try{
+
+			      File newFile = new File (LocalfilePath);
+			      		      
+			      byte [] mybytearray  = new byte [(int)newFile.length()];
+			      FileInputStream fis = new FileInputStream(newFile);
+			      BufferedInputStream bis = new BufferedInputStream(fis);			  
+			      
+			      msg.initArray(mybytearray.length);
+			      msg.setSize(mybytearray.length);
+			      
+			      bis.read(msg.getMybytearray(),0,mybytearray.length);
+			      sendToServer(msg);		      
+			    }
+			catch (Exception e) {
+				System.out.println("Error send (Files)msg) to Server");
+			}
+	}
   /**
    * This method terminates the client.
    */

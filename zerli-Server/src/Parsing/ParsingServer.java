@@ -1,5 +1,12 @@
 package Parsing;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import Entities.Client;
@@ -8,6 +15,7 @@ import Entities.CreditCard;
 import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.MessageType;
+import Entities.MyFile;
 import Entities.Order;
 import Entities.OrdersReport;
 import Entities.RevenueReport;
@@ -245,6 +253,25 @@ public class ParsingServer {
 			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
 			Query.Update_Quantity_of_product(details);
 		}
+		case getAllClients :{
+			return (new Message(MessageType. getAllClients_succ,Query.get_All_Clients()));
+		}
+		case getSurveysId :{
+			return (new Message(MessageType.getSurveysId_succ,Query.get_Surveys_Id()));
+		}
+		case Add_Survey_Result :{
+			ArrayList<Integer> results = (ArrayList<Integer>)(receivedMessage.getMessageData());
+			Query.Updload_survey_results(results);
+			
+		}
+		case send_PDF: {
+			MyFile file = (MyFile) receivedMessage.getMessageData();
+			DateTimeFormatter time = DateTimeFormatter.ofPattern("HH:mm:ss");
+			LocalDateTime nowTime = LocalDateTime.now();
+			Query.updateFile(file);
+			Message messageFromServer;
+			return messageFromServer = new Message(MessageType.upload_pdf_succ, null);
+		}
 		
 		default:
 			break;
@@ -254,5 +281,7 @@ public class ParsingServer {
 	
 		return receivedMessage;
       }
+	
+
 
 }

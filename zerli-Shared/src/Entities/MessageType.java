@@ -20,5 +20,5 @@ public enum MessageType {
 	UpdateOrderStatus_succ, showRevenueReportsForCEO, getStoresForCEORevenueReports, getHomwStoreForCEORevenenueReports_succ,
 	getRevenueReportForCEO_succ, UpdateCompList, UpdateCompList_succ, ClientExist, ClientExist_succ, Upload_Complaint, Upload_Complaint_succ,
 	UpdateCompLaintDetails, Update_refund, Get_Orders_by_Store, Get_Orders_by_Store_succ, UpdateOrderCancel, UpdateOrderCancel_succ, UpdateCreditForClient, getClientEmailAndPhone,
-	ClientEmailAndPhone_succ, RefundForClient_succ, Get_All_Items_In_Catalog, Get_All_Items_In_Catalog_succ, get_Inventories, get_Inventories_succ, UpdateQuanInInventory, 
+	ClientEmailAndPhone_succ, RefundForClient_succ, Get_All_Items_In_Catalog, Get_All_Items_In_Catalog_succ, get_Inventories, get_Inventories_succ, UpdateQuanInInventory, getAllClients, getAllClients_succ, getSurveysId, getSurveysId_succ, Add_Survey_Result, Upload_PDF, send_PDF, upload_pdf_succ, 
 }

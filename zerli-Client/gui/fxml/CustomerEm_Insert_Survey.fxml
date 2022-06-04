@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane style="-fx-background-image: url('/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.CustomerEm_Insert_Survey_Controller">
+   <children>
+      <AnchorPane layoutX="3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-image: url('/images/back6.JPG');">
+         <children>
+            <Label layoutX="426.0" layoutY="39.0" prefHeight="58.0" prefWidth="371.0" text="Insert Survey Results">
+               <font>
+                  <Font size="40.0" />
+               </font>
+            </Label>
+            <Button fx:id="BackBtn" layoutX="33.0" layoutY="520.0" mnemonicParsing="false" onAction="#BackMain" prefHeight="49.0" prefWidth="99.0" text="back">
+               <font>
+                  <Font name="Yu Gothic UI Light" size="21.0" />
+               </font>
+            </Button>
+            <Button fx:id="UpLoadBtn" contentDisplay="TOP" layoutX="668.0" layoutY="520.0" mnemonicParsing="false" onAction="#UploadSurveyToDB" opacity="0.71" prefHeight="49.0" prefWidth="198.0" text="Upload results">
+               <font>
+                  <Font name="Yu Gothic UI Light" size="20.0" />
+               </font>
+            </Button>
+            <Slider fx:id="s1" layoutX="476.0" layoutY="225.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="291.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Slider fx:id="s6" layoutX="478.0" layoutY="436.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="291.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Slider fx:id="s2" layoutX="476.0" layoutY="268.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="291.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Slider fx:id="s3" layoutX="476.0" layoutY="310.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="291.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Slider fx:id="s4" layoutX="476.0" layoutY="349.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="291.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Slider fx:id="s5" layoutX="478.0" layoutY="388.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="14.0" prefWidth="291.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+            <Label layoutX="400.0" layoutY="221.0" text="Q1 :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="400.0" layoutY="263.0" text="Q2 :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="400.0" layoutY="306.0" text="Q3 :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="400.0" layoutY="347.0" text="Q4 :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="400.0" layoutY="388.0" text="Q5 :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="400.0" layoutY="428.0" text="Q6 :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="SurveysIdList" layoutX="524.0" layoutY="136.0" onAction="#ChooseSurvey" prefHeight="25.0" prefWidth="198.0" />
+            <Label layoutX="399.0" layoutY="135.0" prefHeight="27.0" prefWidth="99.0" text="Survey Id :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="ClientIdList" layoutX="524.0" layoutY="175.0" onAction="#ChooseClient" prefHeight="25.0" prefWidth="198.0" />
+            <Label layoutX="399.0" layoutY="174.0" prefHeight="27.0" prefWidth="99.0" text="Client Id :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="UpLbl" layoutX="449.0" layoutY="474.0" prefHeight="17.0" prefWidth="371.0" textFill="RED">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -26,11 +26,12 @@ import controlers.ManagerOrdersController;
 import controlers.ManagerSendEmailController;
 import controlers.ManagerViewReportsOrders;
 import controlers.ManagerViewReportsRevenueController;
-import controlers.PaymentScreenController;
+import controlers.ClientPaymentScreenController;
 import controlers.StoreEmployee_update_Inventory_controller;
 import controlers.StoreEmployee_update_Item_controller;
 import controlers.CustomerEmTableComplaintsScreenController;
 import controlers.CustomerEm_Insert_New_Com_Controller;
+import controlers.CustomerEm_Insert_Survey_Controller;
 
 public class ParsingClient {
 
@@ -114,12 +115,12 @@ public class ParsingClient {
 		    break;
 		}
 		case CreditCardList_succ :{
-			PaymentScreenController.cardList =  (ArrayList<CreditCard>) (receivedMessage.getMessageData());
+			ClientPaymentScreenController.cardList =  (ArrayList<CreditCard>) (receivedMessage.getMessageData());
 		    break;
 		
 		}
 		case CreditValue_succ :{
-			PaymentScreenController.CreditAmmount =receivedMessage.getMessageData() ;
+			ClientPaymentScreenController.CreditAmmount =receivedMessage.getMessageData() ;
 		    break;
 		}
 		case CreditUsed_succ:{
@@ -130,11 +131,11 @@ public class ParsingClient {
 		    break;
 		}
 		case Add_Order_succ:{
-			PaymentScreenController.OrderNum= receivedMessage.getMessageData();	
+			ClientPaymentScreenController.OrderNum= receivedMessage.getMessageData();	
 		    break;
 		}
 		case IsNewClient_succ:{
-			PaymentScreenController.newClient= receivedMessage.getMessageData();
+			ClientPaymentScreenController.newClient= receivedMessage.getMessageData();
 		    break;
 		}
 		case UpdateNewClientDiscount_succ:{
@@ -188,6 +189,14 @@ public class ParsingClient {
 		}
 		case get_Inventories_succ:{
 			StoreEmployee_update_Inventory_controller.Inventories = (ArrayList<Product_In_Inventory>) (receivedMessage.getMessageData());
+			 break;
+		}
+		case getAllClients_succ:{
+			CustomerEm_Insert_Survey_Controller.Clients = (ArrayList<String>) (receivedMessage.getMessageData());
+			 break;
+		}
+		case getSurveysId_succ:{
+			CustomerEm_Insert_Survey_Controller.Surveys = (ArrayList<String>) (receivedMessage.getMessageData());
 			 break;
 		}
 

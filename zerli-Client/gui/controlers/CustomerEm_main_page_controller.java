@@ -36,13 +36,13 @@ public class CustomerEm_main_page_controller extends AbstractController implemen
     }
 
     @FXML
-    void goInsertSurveysPage(ActionEvent event) {
-
+    void goInsertSurveysPage(ActionEvent event) throws IOException {
+        start(event, "CustomerEm_Insert_Survey", "Insert surveys results screen", "");
     }
 
     @FXML
-    void goUpReportPage(ActionEvent event) {
-
+    void goUpReportPage(ActionEvent event) throws IOException {
+        start(event, "Customer_Em_upload_PDF", "Insert surveys results screen", "");
     }
 
     @FXML
@@ -53,7 +53,12 @@ public class CustomerEm_main_page_controller extends AbstractController implemen
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		if(LoginScreenController.user.getRole().equals("CustomerEmployee")) {
+			this.UploadServiceBtn.setDisable(true);
+		}
+		else if (LoginScreenController.user.getRole().equals("ServiceSpecialist")) {
+			this.InsertSurveysBtn.setDisable(true);
+		}
 		
 	}
 

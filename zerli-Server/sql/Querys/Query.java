@@ -12,6 +12,7 @@ import Entities.Client;
 import Entities.Complaint;
 import Entities.CreditCard;
 import Entities.Item_In_Catalog;
+import Entities.MyFile;
 import Entities.Order;
 import Entities.OrdersReport;
 import Entities.Product_In_Inventory;
@@ -960,7 +961,76 @@ public class Query {
 			
 			}
 		}
+
+		public static ArrayList<String> get_All_Clients() {
+			ArrayList<String> ClientsId= new ArrayList<String>();
+			PreparedStatement stmt;
+			try {
+				if (DBConnect.conn != null) {
+					stmt = DBConnect.conn.prepareStatement("SELECT client_id FROM zerli_db.client");
+					ResultSet rs = stmt.executeQuery();
+					while (rs.next()) {
+						ClientsId.add(rs.getString("client_id"));
+					}
+					rs.close();
+				} else {
+					System.out.println("Conn is null");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return ClientsId;
+		}
+
+		public static ArrayList<String> get_Surveys_Id() {
+			ArrayList<String> Surveys= new ArrayList<String>();
+			PreparedStatement stmt;
+			try {
+				if (DBConnect.conn != null) {
+					stmt = DBConnect.conn.prepareStatement("SELECT DISTINCT SurveyId FROM zerli_db.surveys");
+					ResultSet rs = stmt.executeQuery();
+					while (rs.next()) {
+						Surveys.add(rs.getString("SurveyId"));
+					}
+					rs.close();
+				} else {
+					System.out.println("Conn is null");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return Surveys;
+		}
+
+		public static void Updload_survey_results(ArrayList<Integer> results) {
+			PreparedStatement stmt;
+			try {
+				stmt = DBConnect.conn.prepareStatement("INSERT INTO zerli_db.surveys (clientId,SurveyId,Q1,Q2,Q3,Q4,Q5,Q6) VALUES(?,?,?,?,?,?,?,?)");
+				stmt.setInt(1, results.get(0));
+				stmt.setInt(2, results.get(7));
+				stmt.setInt(3, results.get(1));		
+				stmt.setInt(4, results.get(2));
+				stmt.setInt(5, results.get(3));
+				stmt.setInt(6, results.get(4));
+				stmt.setInt(7, results.get(5));
+				stmt.setInt(8, results.get(6));
+				stmt.executeUpdate();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			
+		}
+
+		public static void updateFile(MyFile file) {
+			// TODO Auto-generated method stub
+			
+		}
+			
 }
+
+		
+
 			
 			
 

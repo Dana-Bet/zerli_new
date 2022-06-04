@@ -57,5 +57,11 @@ public class ClientController {
 
 	  client.handleMessageFromClientUI(msg);
   }
+  
+  public void acceptFile(String message) 
+  {
+
+	  client.handleMessageFromClientUI(message) ;
+  }
 }
 //End of ConsoleChat class

@@ -21,7 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import main.ClientUI;
 
-public class PaymentScreenController extends AbstractController implements Initializable {
+public class ClientPaymentScreenController extends AbstractController implements Initializable {
 
 	
 	public static ArrayList<CreditCard> cardList = new ArrayList <CreditCard>();
@@ -108,14 +108,14 @@ public class PaymentScreenController extends AbstractController implements Initi
 	    
 		if(this.creditUsed>0) {//if the client used credit we need to update in DB
 			ClientOrderPageController.addDetailsToRecipt.append("-"+creditUsed+" credit used\n");
-			int creditToUpdate= (Integer)PaymentScreenController.CreditAmmount-creditUsed;
+			int creditToUpdate= (Integer)ClientPaymentScreenController.CreditAmmount-creditUsed;
 			StringBuilder str = new StringBuilder();
 			str.append(LoginScreenController.user.getId());
 			str.append("@");
 			str.append(creditToUpdate);
 			ClientUI.chat.accept(new Message(MessageType.CreditUsed,str.toString()));	
 			}		
-		PaymentScreenController.TotalPrice-=this.creditUsed;
+		ClientPaymentScreenController.TotalPrice-=this.creditUsed;
 		
 		if((Integer)newClient!=0)
 		{
@@ -238,11 +238,11 @@ public class PaymentScreenController extends AbstractController implements Initi
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		newClient =null;
-		PaymentScreenController.TotalPrice = ClientOrderPageController.TotalPrice;
+		ClientPaymentScreenController.TotalPrice = ClientOrderPageController.TotalPrice;
 		ClientUI.chat.accept(new Message(MessageType.IsNewClient,id));
 		if((Integer)newClient!=0)
 		{
-          PaymentScreenController.TotalPrice = (float) (TotalPrice*0.8);
+          ClientPaymentScreenController.TotalPrice = (float) (TotalPrice*0.8);
 		}	
 		
 		ClientUI.chat.accept(new Message(MessageType.CreditCardList,id));
@@ -257,10 +257,10 @@ public class PaymentScreenController extends AbstractController implements Initi
 		ArrayList<Integer> numList = new ArrayList<Integer>();
 		int i = 0 ;
 		if((Integer)CreditAmmount > TotalPrice ) {
-			PaymentScreenController.CreditAmmount =TotalPrice.intValue();
+			ClientPaymentScreenController.CreditAmmount =TotalPrice.intValue();
 		}
 		
-		while(i<=(Integer)PaymentScreenController.CreditAmmount) {
+		while(i<=(Integer)ClientPaymentScreenController.CreditAmmount) {
 			numList.add(i);
 			i++;
 	}
