@@ -237,6 +237,14 @@ public class ParsingServer {
 		case Get_All_Items_In_Catalog :{
 			return (new Message(MessageType.Get_All_Items_In_Catalog_succ,Query.get_All_Catalog()));
 		}
+		case  get_Inventories:{
+			String store = (String)(receivedMessage.getMessageData());
+			return (new Message(MessageType. get_Inventories_succ,Query.get_Inventories(store)));
+		}
+		case UpdateQuanInInventory:{
+			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
+			Query.Update_Quantity_of_product(details);
+		}
 		
 		default:
 			break;

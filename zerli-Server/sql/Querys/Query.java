@@ -14,6 +14,7 @@ import Entities.CreditCard;
 import Entities.Item_In_Catalog;
 import Entities.Order;
 import Entities.OrdersReport;
+import Entities.Product_In_Inventory;
 import Entities.RevenueReport;
 import Entities.Store;
 
@@ -902,6 +903,62 @@ public class Query {
 				e.printStackTrace();
 			}
 			return Catalog;
+		}
+
+		public static ArrayList<Product_In_Inventory> get_Inventories(String store) {
+			ArrayList<Product_In_Inventory> inventories= new ArrayList<>();
+			PreparedStatement stmt;
+			try {
+				if (DBConnect.conn != null) {
+					stmt = DBConnect.conn
+							.prepareStatement("SELECT * FROM zerli_db.product_inventory WHERE store= ? ");
+					stmt.setString(1,store);
+					ResultSet rs = stmt.executeQuery();
+					while (rs.next()) {
+						inventories.add(new Product_In_Inventory(rs.getString("ProductName"), rs.getString("ProductId"), rs.getString("store"),rs.getInt("Quantity"))) ;
+
+					}
+					rs.close();
+				} else {
+					System.out.println("Conn is null");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return inventories;
+		}
+
+		public static void Update_Quantity_of_product(ArrayList<String> details) {
+			PreparedStatement stmt;
+			if (details.get(3).equals("0")) {
+				try {
+					stmt = DBConnect.conn.prepareStatement("UPDATE zerli_db.product_inventory SET Quantity=Quantity-? WHERE store=? AND ProductId=? ");
+					System.out.println(details.toString());
+					stmt.setInt(1,Integer.valueOf(details.get(0)));
+					stmt.setString(2,details.get(1));
+					stmt.setString(3,details.get(2));
+					stmt.executeUpdate();
+
+					} catch (SQLException e) {
+				e.printStackTrace();
+					}
+				
+			}
+			else {
+			try {
+				stmt = DBConnect.conn.prepareStatement("UPDATE zerli_db.product_inventory SET Quantity=? WHERE store=? AND ProductId=? ");
+				System.out.println(details.toString());
+				stmt.setInt(1,Integer.valueOf(details.get(0)));
+				stmt.setString(2,details.get(1));
+				stmt.setString(3,details.get(2));
+				stmt.executeUpdate();
+
+				} catch (SQLException e) {
+			e.printStackTrace();
+				}
+			
+			
+			}
 		}
 }
 			

@@ -23,14 +23,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import main.ClientUI;
 
-//areaa
+
 public class ClientCartScreenController extends AbstractController implements Initializable {
 	public static ClientCart cart;
-	ArrayList<LineInCartTable> l ;
+	static ArrayList<LineInCartTable> l ;
 	ObservableList<LineInCartTable> observableList;
 	
         @FXML
-        private TableView<LineInCartTable> tableV;
+        public TableView<LineInCartTable> tableV;
 
 		@FXML
 		private ResourceBundle resources;
@@ -75,7 +75,7 @@ public class ClientCartScreenController extends AbstractController implements In
         	this.uplbl.setText("");
             ObservableList<LineInCartTable> list;
             list = null;
-            list = this.tableV.getSelectionModel().getSelectedItems();
+            list = tableV.getSelectionModel().getSelectedItems();
             if(list!=null&&!list.isEmpty() ) {
                int id =list.get(0).getId() ;
                cart.DecFromCartTable(id);
@@ -104,7 +104,7 @@ public class ClientCartScreenController extends AbstractController implements In
 	    	   } 
        }
         	  	
-        
+	      
         @FXML
         void BackBtn(ActionEvent event) throws IOException {
         	start(event, "ClientCreateOrderScreen", "Create Order", "");
@@ -121,6 +121,23 @@ public class ClientCartScreenController extends AbstractController implements In
         	start(event, "ClientOrderPage", "Order page", "");
         }
         
+	    public static void Update_Inventory() {
+	   
+            ObservableList<LineInCartTable> list;
+            for(LineInCartTable line : l) {
+            	if(line.getPrice()!=0) {
+                	ArrayList<String> details = new ArrayList<String>();
+                	details.add(String.valueOf(line.getQuan()));
+                	details.add(ClientOrderPageController.order.getStore());
+                	details.add(String.valueOf(line.getId()));
+                   	details.add("0");
+        			ClientUI.chat.accept(new Message(MessageType.UpdateQuanInInventory,details));
+            	}
+            }
+	      }
+	    
+	    
+	    
     	@Override
 	    public void initialize(URL arg0, ResourceBundle arg1) {
 

@@ -25,8 +25,8 @@ public class StoreEmployee_UpdateCatalogController extends AbstractController im
     private Button backBtn;
 
     @FXML
-    void Update_Quan(ActionEvent event) {
-
+    void Update_Quan(ActionEvent event) throws IOException {
+    	start(event, "StoreEmployee_update_Inventory", "Update Catalog page","");
     }
 
     @FXML

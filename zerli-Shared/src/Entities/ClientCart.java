@@ -116,6 +116,7 @@ public class ClientCart {
 	    	  return (float) 0 ;
 	      }
 	      
+	      
 	      public void CreateRecipt() {
 	    	  StringBuilder recipt = new StringBuilder();
 	    	  for(List<Item_In_Catalog> i : Order_Components.values()) {

@@ -9,6 +9,7 @@ import Entities.Item_In_Catalog;
 import Entities.Message;
 import Entities.Order;
 import Entities.OrdersReport;
+import Entities.Product_In_Inventory;
 import Entities.RevenueReport;
 import Entities.Store;
 import Entities.User;
@@ -26,6 +27,7 @@ import controlers.ManagerSendEmailController;
 import controlers.ManagerViewReportsOrders;
 import controlers.ManagerViewReportsRevenueController;
 import controlers.PaymentScreenController;
+import controlers.StoreEmployee_update_Inventory_controller;
 import controlers.StoreEmployee_update_Item_controller;
 import controlers.CustomerEmTableComplaintsScreenController;
 import controlers.CustomerEm_Insert_New_Com_Controller;
@@ -182,6 +184,10 @@ public class ParsingClient {
 		}
 		case Get_All_Items_In_Catalog_succ :{
 			 StoreEmployee_update_Item_controller.All_Items_In_Catalog =(ArrayList<Item_In_Catalog>) (receivedMessage.getMessageData());
+			 break;
+		}
+		case get_Inventories_succ:{
+			StoreEmployee_update_Inventory_controller.Inventories = (ArrayList<Product_In_Inventory>) (receivedMessage.getMessageData());
 			 break;
 		}
 

@@ -126,7 +126,7 @@ public class PaymentScreenController extends AbstractController implements Initi
 		ClientOrderPageController.addDetailsToRecipt.append("Final price = "+TotalPrice+" $");
 		ClientCartScreenController.cart.CreateRecipt();
 		ClientCartScreenController.cart.addToRecipt(ClientOrderPageController.addDetailsToRecipt.toString());
-		
+		ClientCartScreenController.Update_Inventory();
 		UpdateOrderInDB();
 		updateReciptInDB();
 		
