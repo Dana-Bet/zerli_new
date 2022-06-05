@@ -635,7 +635,7 @@ public class Query {
 						String store = rs.getString("store");
 						String Quantity = rs.getString("Quantity");
 						String type = rs.getString("type");
-						orders.add(new OrdersReport(store,month,year,Quantity,type));
+						orders.add(new OrdersReport(month,year,store,Quantity,type));
 					}
 					rs.close();
 				} else {
