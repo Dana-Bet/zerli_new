@@ -77,8 +77,8 @@ public class ParsingServer {
 			return (new Message(MessageType.getTypeProductOrders_succ,typeOrders));
 		}
 		case getCustomerToFreeze:{
-			String storeManager = (String)(receivedMessage.getMessageData());
-			ArrayList<String> customerList = Query.getCustomerToFreeze(storeManager);
+
+			ArrayList<String> customerList = Query.getCustomerToFreeze();
 			return (new Message(MessageType.getCustomerToFreeze_succ, customerList));
 		}
 		
@@ -134,7 +134,7 @@ public class ParsingServer {
 		}
 		case IsNewClient:{
 			String userId = (String) receivedMessage.getMessageData();
-			int res= Query.IsNewClient(userId);
+			ArrayList<Integer> res= Query.IsNewClient(userId);
 			return (new Message(MessageType.IsNewClient_succ,res));
 		}
 		case  UpdateNewClientDiscount:{
@@ -160,9 +160,7 @@ public class ParsingServer {
 			return (new Message(MessageType.getTypeProductForCEOordersReports_succ,productype));
 		}
 		case getCEOordersReport:{
-			System.out.println("line 124");
 			ArrayList <String> details = (ArrayList<String>) receivedMessage.getMessageData();
-			System.out.println("line 126");
 			ArrayList<OrdersReport> typeOrders = Query.getOrdersReportForCEO(details);
 			System.out.println(typeOrders);
 			return (new Message(MessageType.getCEOordersReports_succ,typeOrders));
@@ -204,6 +202,11 @@ public class ParsingServer {
 			return (new Message(MessageType.UpdateCompList_succ,Query.getComplaints()));
 
 		}
+//		case  Get_All_Order_by_Store :{
+//			String ManagerStore = (String) receivedMessage.getMessageData();
+//			ArrayList<Order> orders=Query.get_Orders_list_for_manager(ManagerStore);
+//			return (new Message(MessageType.Get_All_Order_by_Store_succ,orders));
+//		}
 		
 		case getStoresForCEORevenueReports :{
 			ArrayList<String> storeList = Query.GetStoreListForCEORevenueReports();
@@ -233,6 +236,7 @@ public class ParsingServer {
 		case Update_refund:{
 			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
 			Query.Update_refund(details);
+			return (new Message(MessageType.Update_refund_succ,""));
 		}
 		case UpdateCreditForClient:{
 			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
@@ -262,6 +266,7 @@ public class ParsingServer {
 		case Add_Survey_Result :{
 			ArrayList<Integer> results = (ArrayList<Integer>)(receivedMessage.getMessageData());
 			Query.Updload_survey_results(results);
+			return (new Message(MessageType. Add_Survey_Result_succ,Query.get_Surveys_Id()));
 			
 		}
 		case send_PDF: {
@@ -271,6 +276,31 @@ public class ParsingServer {
 			Query.updateFile(file);
 			Message messageFromServer;
 			return messageFromServer = new Message(MessageType.upload_pdf_succ, null);
+		}
+		case getStoresForCEOordersDistribution:{
+			ArrayList<String> storeList =  Query.GetStoreListForCEORordersDistribution();
+			return (new Message(MessageType.getHomwStoreForCEORDistributionOfOrders_succ,storeList));
+		}
+	
+		case SetDetailsInTable1ForCEOordersDistribution:{
+			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
+			System.out.println(details.toString());
+			String income = Query.Get_details_for_orders_Distribution(details);
+			return (new Message(MessageType.SetDetailsInTable1ForCEOordersDistribution_succ,income));
+			
+		}
+		
+		case getYearsForCEOordersDistribution:{
+			ArrayList<String> yearsList =  Query.GetYearsListForCEORordersDistribution();
+			return (new Message(MessageType.getYearsForCEORDistributionOfOrders_succ,yearsList));
+		}
+		
+		
+		case getForCEOComplaintsDistribution:{
+			ArrayList<String> details = (ArrayList<String>)(receivedMessage.getMessageData());
+			System.out.println(details);
+			int cnt = Query.GetComplaintsListForCEOComplaintsDistribution(details);
+			return (new Message(MessageType.getForCEOComplaintsDistribution_succ,cnt));
 		}
 		
 		default:

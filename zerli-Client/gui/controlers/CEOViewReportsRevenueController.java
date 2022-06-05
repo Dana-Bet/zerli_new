@@ -1,5 +1,6 @@
 package controlers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -45,6 +46,10 @@ public class CEOViewReportsRevenueController extends AbstractController implemen
 
     @FXML
     private Button showBtn;
+    
+    @FXML
+    private Button backBtn;
+    
     public static ArrayList<String> stores = new ArrayList<String>();
     public static String store;
     public static ArrayList<RevenueReport> revenue= new ArrayList<RevenueReport>();
@@ -60,6 +65,11 @@ public class CEOViewReportsRevenueController extends AbstractController implemen
      	amountcol.setCellValueFactory(new PropertyValueFactory<RevenueReport, String>("ordersamount"));
     	System.out.println(revenue);
     	table.setItems(observableList3);
+    }
+    
+    @FXML
+    void Back(ActionEvent event) throws IOException {
+    	start(event,"CEOMainScreen","","");
     }
 
 	@Override

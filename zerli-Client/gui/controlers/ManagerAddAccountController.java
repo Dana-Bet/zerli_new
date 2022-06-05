@@ -94,13 +94,13 @@ public class ManagerAddAccountController extends AbstractController implements I
     
     @FXML
 	void Confirm(ActionEvent event) throws IOException {
-//compleate username and password
 		if (txtFirstName.getText().isEmpty() || txtLastName.getText().isEmpty() || txtID.getText().isEmpty()
 				|| txtPhone.getText().isEmpty() || txtEmail.getText().isEmpty()
 				|| txtCreditcard.getText().isEmpty())
 			{
-				updateLbl.setText("You need compleate all");
+				updateLbl.setText("Please fill all required fileds");
 			}
+		
 		else {
 			Account.setUserName(txtUsername.getText());
 			Account.setPassword(txtPassword.getText());

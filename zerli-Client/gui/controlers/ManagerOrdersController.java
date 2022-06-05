@@ -26,6 +26,7 @@ public class ManagerOrdersController extends AbstractController implements Initi
     private String Status;
     private int OrderNum;
     public static Object ammount;
+    public static ArrayList<String> email_phone;
     
 	@FXML
 	private ResourceBundle resources;
@@ -96,11 +97,15 @@ public class ManagerOrdersController extends AbstractController implements Initi
         		arr.add(order.getClientId());
         		arr.add(String.valueOf(OrderNum));
         		ClientUI.chat.accept(new Message(MessageType.UpdateCreditForClient,arr));
-        		StringBuilder sendEmail = new StringBuilder();
-        		 sendEmail.append(order.getClientId());
-           		 sendEmail.append("#");
-           		 sendEmail.append("1");
-            	startPopUp(event, "ManagerSendEmail", "Send cancellation Email",sendEmail.toString());
+        		ClientUI.chat.accept(new Message(MessageType.getClientEmailAndPhone,order.getClientId()));
+        		
+        		StringBuilder str = new StringBuilder();
+        		str.append(ManagerOrdersController.email_phone.get(0));
+          		str.append("#");
+          		str.append(ManagerOrdersController.email_phone.get(1));
+          		
+          		System.out.println(str.toString());
+            	startPopUp(event, "ManagerSendCanellationEmail", "Send cancellation Email",str.toString());
                 initialize(location, resources) ;
         	}
         	else 
@@ -133,11 +138,14 @@ public class ManagerOrdersController extends AbstractController implements Initi
         		arr.add("Confirm");
         		arr.add(String.valueOf(OrderNum));
         		ClientUI.chat.accept(new Message(MessageType.UpdateOrderStatus,arr));
-        		StringBuilder sendEmail = new StringBuilder();
-        		sendEmail.append(order.getClientId());
-        		sendEmail.append("#");
-        		sendEmail.append("0");
-            	startPopUp(event, "ManagerSendEmail", "Send comfirmation Email",sendEmail.toString());
+         		ClientUI.chat.accept(new Message(MessageType.getClientEmailAndPhone,order.getClientId()));
+        		StringBuilder str = new StringBuilder();
+        		str.append(ManagerOrdersController.email_phone.get(0));
+          		str.append("#");
+          		str.append(ManagerOrdersController.email_phone.get(1));
+          		
+          		System.out.println(str.toString());
+            	startPopUp(event, "ManagerSendConfirmationEmail", "Send comfirmation Email",str.toString());
                 initialize(location, resources) ;
         		break;
         		

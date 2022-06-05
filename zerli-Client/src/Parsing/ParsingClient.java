@@ -13,17 +13,21 @@ import Entities.Product_In_Inventory;
 import Entities.RevenueReport;
 import Entities.Store;
 import Entities.User;
+import controlers.CEODistributionOfComplaintsController;
+import controlers.CEODistributionOfOrdersController;
 import controlers.CEOViewReportsOrdersController;
+import controlers.CEOViewReportsRevenueController;
 import controlers.ClientCartScreenController;
 import controlers.ClientAssemblyProductController;
 import controlers.ClientCatalogController;
+import controlers.ClientMainPageController;
 import controlers.ClientOrderPageController;
 import controlers.ClientOrdersTableController;
 import controlers.LoginScreenController;
 import controlers.ManagerAddAccountController;
 import controlers.ManagerFreezeController;
 import controlers.ManagerOrdersController;
-import controlers.ManagerSendEmailController;
+import controlers.ManagerSendCancellationEmailController;
 import controlers.ManagerViewReportsOrders;
 import controlers.ManagerViewReportsRevenueController;
 import controlers.ClientPaymentScreenController;
@@ -135,7 +139,8 @@ public class ParsingClient {
 		    break;
 		}
 		case IsNewClient_succ:{
-			ClientPaymentScreenController.newClient= receivedMessage.getMessageData();
+			ClientPaymentScreenController.newClient= (ArrayList<Integer>) receivedMessage.getMessageData();
+			ClientMainPageController.newClient= (ArrayList<Integer>) receivedMessage.getMessageData();
 		    break;
 		}
 		case UpdateNewClientDiscount_succ:{
@@ -143,6 +148,9 @@ public class ParsingClient {
 		}
 		case Get_All_Order_by_id_succ:{///+++
 			ClientOrdersTableController.list = (ArrayList<Order>) (receivedMessage.getMessageData());
+		    break;
+		}
+		case Update_refund_succ:{
 		    break;
 		}
 		case Get_Orders_by_Store_succ :{
@@ -180,7 +188,7 @@ public class ParsingClient {
 			break;
 		}
 		case ClientEmailAndPhone_succ :{
-			 ManagerSendEmailController.email_phone = (ArrayList<String>) (receivedMessage.getMessageData());
+			ManagerOrdersController.email_phone = (ArrayList<String>) (receivedMessage.getMessageData());
 				break;
 		}
 		case Get_All_Items_In_Catalog_succ :{
@@ -198,6 +206,32 @@ public class ParsingClient {
 		case getSurveysId_succ:{
 			CustomerEm_Insert_Survey_Controller.Surveys = (ArrayList<String>) (receivedMessage.getMessageData());
 			 break;
+		}
+		case Add_Survey_Result_succ:{
+			 break;
+
+		}
+		case getHomwStoreForCEORDistributionOfOrders_succ:{
+			CEODistributionOfOrdersController.stores = (ArrayList<String>)(receivedMessage.getMessageData());
+		}
+
+		case getYearsForCEORDistributionOfOrders_succ:{
+			CEODistributionOfOrdersController.years = (ArrayList<String>)(receivedMessage.getMessageData());
+		}
+
+		case SetDetailsInTable1ForCEOordersDistribution_succ:{
+			CEODistributionOfOrdersController.income = (String) receivedMessage.getMessageData();
+		}
+	
+		case getForCEOComplaintsDistribution_succ: {
+			CEODistributionOfComplaintsController.counter = (int)receivedMessage.getMessageData();
+		}
+		case getHomwStoreForCEORevenenueReports_succ: {
+			CEOViewReportsRevenueController.stores = (ArrayList<String>)(receivedMessage.getMessageData());
+		}
+
+		case getRevenueReportForCEO_succ: {
+			CEOViewReportsRevenueController.revenue = (ArrayList<RevenueReport>)(receivedMessage.getMessageData());
 		}
 
 		default:{

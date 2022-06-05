@@ -29,7 +29,7 @@ public class ClientPaymentScreenController extends AbstractController implements
 	public static Float TotalPrice;
 	private String choosingCard=null;
 	String ChoosingMethod = null;
-	public static Object newClient ;
+	public static ArrayList<Integer> newClient ;
 	public static Object OrderNum;
 	private RadioButton selectedRadioButton;
 	private LocalDate exDate;
@@ -117,7 +117,7 @@ public class ClientPaymentScreenController extends AbstractController implements
 			}		
 		ClientPaymentScreenController.TotalPrice-=this.creditUsed;
 		
-		if((Integer)newClient!=0)
+		if(newClient.get(0)!=0)
 		{
 		  ClientOrderPageController.addDetailsToRecipt.append("-20% off for first purchase !!#");
   	      ClientUI.chat.accept(new Message(MessageType.UpdateNewClientDiscount,id));
@@ -132,6 +132,7 @@ public class ClientPaymentScreenController extends AbstractController implements
 		
 		ClientCartScreenController.cart.Order_Components.clear();
 		ClientCartScreenController.cart.setNumberOfItems();
+
 		start(event, "ClientMainPage", "Main page", "");
 
     }
@@ -240,7 +241,7 @@ public class ClientPaymentScreenController extends AbstractController implements
 		newClient =null;
 		ClientPaymentScreenController.TotalPrice = ClientOrderPageController.TotalPrice;
 		ClientUI.chat.accept(new Message(MessageType.IsNewClient,id));
-		if((Integer)newClient!=0)
+		if(newClient.get(0)!=0)
 		{
           ClientPaymentScreenController.TotalPrice = (float) (TotalPrice*0.8);
 		}	

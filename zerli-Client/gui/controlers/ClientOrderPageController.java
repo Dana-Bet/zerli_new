@@ -109,6 +109,7 @@ public class ClientOrderPageController  extends AbstractController implements In
 
     @FXML
     void ToPayScreen(ActionEvent event) throws IOException {
+    	addDetailsToRecipt = new StringBuilder();
     	setTime();
     	if(checkAllFileds()!=1) {return;}
     	if(delivery!=null) {

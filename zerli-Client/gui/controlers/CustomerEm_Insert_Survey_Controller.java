@@ -64,7 +64,7 @@ public class CustomerEm_Insert_Survey_Controller extends AbstractController impl
     }
 
     @FXML
-    void UploadSurveyToDB(ActionEvent event) {
+    void UploadSurveyToDB(ActionEvent event) throws IOException {
 		UpLbl.setText("");
 
     	if (ClientId==null) {
@@ -87,7 +87,7 @@ public class CustomerEm_Insert_Survey_Controller extends AbstractController impl
         answers.add(Integer.valueOf(SurveyId));
 
         ClientUI.chat.accept(new Message(MessageType.Add_Survey_Result,answers));
-
+        start(event, "CustomerEm_main_page", "Customers service employee screen", "");
         }
     
 

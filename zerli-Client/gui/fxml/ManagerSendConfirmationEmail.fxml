@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ManagerSendEmailController ">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.ManagerSendConfirmationEmailController">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="350.0" prefWidth="350.0">
          <children>
@@ -16,9 +16,9 @@
                </font>
             </Button>
             <TextArea fx:id="EmailContentBox" layoutX="47.0" layoutY="71.0" prefHeight="181.0" prefWidth="258.0" wrapText="true" />
-            <Label fx:id="titleOfWin" layoutX="50.0" layoutY="44.0" prefHeight="17.0" prefWidth="157.0">
+            <Label layoutX="50.0" layoutY="44.0" prefHeight="17.0" prefWidth="157.0" text="Confirmation email">
                <font>
-                  <Font name="Arial" size="13.0" />
+                  <Font name="Arial" size="14.0" />
                </font>
             </Label>
          </children>

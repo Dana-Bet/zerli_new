@@ -2,6 +2,7 @@ package controlers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import Entities.Message;
 import Entities.MessageType;
@@ -15,7 +16,9 @@ import main.ClientUI;
 
 
 public class ClientMainPageController extends AbstractController implements Initializable {
-
+	public static ArrayList<Integer> newClient ;
+	private String id = LoginScreenController.user.getId();
+	
     @FXML
     private ImageView cartImage;
     
@@ -48,6 +51,16 @@ public class ClientMainPageController extends AbstractController implements Init
     
     @FXML
 	public void OpenCreateOrdersPage(ActionEvent event) throws Exception {
+		ClientUI.chat.accept(new Message(MessageType.IsNewClient,id));
+		if(newClient.get(0)!=0)
+		{
+			
+			try {
+				startPopUp(new ActionEvent(), "Client_msg_new_client", "","");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}	
           start(event, "ClientCreateOrderScreen", "Create Order", "");
 	}
 
@@ -73,11 +86,14 @@ public class ClientMainPageController extends AbstractController implements Init
 	@Override
 	public void display(String string) {
 		HiUserLabel.setText("Hi "+LoginScreenController.user.getUserName());
+		
 			
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+
 		this.NumberOfProductLbl.setText(ClientCartScreenController.cart.getNumberOfItems().toString());
 		CartBtn.setStyle("-fx-background-color: transparent;");
 		CartBtn.setGraphic(cartImage);

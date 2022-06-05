@@ -53,6 +53,8 @@ public class CEOViewReportsOrdersController extends AbstractController implement
     @FXML
     private Button showBtn;
 
+    @FXML
+    private Button backBtn;
  
     public static ArrayList<String> types = new ArrayList<String>();
     public static ArrayList<String> stores = new ArrayList<String>();
@@ -74,6 +76,11 @@ public class CEOViewReportsOrdersController extends AbstractController implement
     	details.clear();
     }
 	
+    @FXML
+    void Back(ActionEvent event) throws IOException {
+    	start(event,"CEOMainScreen","","");
+    }
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ClientUI.chat.accept(new Message(MessageType.getStoresForCEOordersReports,null));

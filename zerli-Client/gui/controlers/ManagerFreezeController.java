@@ -37,8 +37,7 @@ public class ManagerFreezeController extends AbstractController implements  Init
 
     @FXML
     private Button backBtn;
-    @FXML
-    private ComboBox<String> homeStroeBtn;
+
     @FXML
     private Label upLbl;
 
@@ -69,10 +68,7 @@ public class ManagerFreezeController extends AbstractController implements  Init
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
     	this.upLbl.setText("");
-          this.homeStroeBtn.setValue(LoginScreenController.user.getHomeStore());
-          this.homeStroeBtn.setDisable(true);
-          String store = homeStroeBtn.getValue();
-  		  ClientUI.chat.accept(new Message(MessageType.getCustomerToFreeze,store));
+  		  ClientUI.chat.accept(new Message(MessageType.getCustomerToFreeze,""));
   		  ObservableList<String> observableList1 = FXCollections.observableArrayList(customerList);
   		  customerName.setItems(observableList1);
 	}

@@ -28,7 +28,7 @@ import main.ClientUI;
 
 public class ClientOrdersTableController extends AbstractController implements Initializable {
 	public static ArrayList<Order> list; 
-	public static ArrayList<String> recipt=null;
+	public static ArrayList<String> recipt;
     private Timestamp OrderTime;
     private String SuppDate;
 	private String SuppTime;
@@ -141,11 +141,13 @@ public class ClientOrdersTableController extends AbstractController implements I
 
     @FXML
     void DisplaySelectedOrder(ActionEvent event) {
+        ClientOrdersTableController.recipt=new ArrayList<String>();
     	upLbl.setText("");
         Order order = null;
         order = table.getSelectionModel().getSelectedItem();
         if(order!=null) {
             int OrderNum =order.getOrderNumber();
+
 			ClientUI.chat.accept(new Message(MessageType.getRecipt,OrderNum));
 			updateTextRecipt();
         }
@@ -174,6 +176,7 @@ public class ClientOrdersTableController extends AbstractController implements I
     		long difference= seconds/3600 ;
 
     		this.difference_In_Hours = difference;
+    		this.difference_In_Hours =Math.abs(difference);
 
     }   
     
