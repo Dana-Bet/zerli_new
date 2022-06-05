@@ -40,6 +40,9 @@ public class ManagerFreezeController extends AbstractController implements  Init
 
     @FXML
     private Label upLbl;
+    
+    @FXML
+    private Label conlbl;
 
     
     public static ArrayList<String> customerList;
@@ -49,6 +52,7 @@ public class ManagerFreezeController extends AbstractController implements  Init
 
     @FXML
     void Freeze(ActionEvent event) {
+  		    this.conlbl.setText("");
 	    	this.upLbl.setText("");
     		customer = customerName.getValue();
     		if(customer==null || customer.isEmpty()) {
@@ -57,6 +61,7 @@ public class ManagerFreezeController extends AbstractController implements  Init
     		}
     		else {
         		ClientUI.chat.accept(new Message(MessageType.customerFreeze,customer));
+        		this.conlbl.setText("Customer's account is frozen.");
     		}
 
     }
@@ -71,6 +76,7 @@ public class ManagerFreezeController extends AbstractController implements  Init
   		  ClientUI.chat.accept(new Message(MessageType.getCustomerToFreeze,""));
   		  ObservableList<String> observableList1 = FXCollections.observableArrayList(customerList);
   		  customerName.setItems(observableList1);
+  	      this.conlbl.setText("");
 	}
 
 	@Override

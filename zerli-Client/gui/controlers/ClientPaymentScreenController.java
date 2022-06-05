@@ -153,6 +153,7 @@ public class ClientPaymentScreenController extends AbstractController implements
 		this.CardNumberTxt.setText(" ");
 		selectedRadioButton = (RadioButton) g2.getSelectedToggle();
 		this.ChoosingMethod = selectedRadioButton.getText();
+		cardsList.setDisable(false);
     }
 		
 
@@ -253,6 +254,7 @@ public class ClientPaymentScreenController extends AbstractController implements
 			 cardsForView.add(c.toString());
 	}
 		cardsList.getItems().addAll(cardsForView);
+		cardsList.setDisable(true);
 		
 		ClientUI.chat.accept(new Message(MessageType.CreditValue,id));
 		ArrayList<Integer> numList = new ArrayList<Integer>();

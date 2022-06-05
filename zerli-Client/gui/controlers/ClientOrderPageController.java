@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import Entities.Delivery;
 import Entities.Message;
@@ -192,10 +193,11 @@ public class ClientOrderPageController  extends AbstractController implements In
             String supphour = this.timeChoiseList.getValue();
             for(String s : hourList) {
             	if(supphour.compareTo(s)==0) {
-            		String[] h = s.split(" ");
-            		this.AM_PM = " "+h[1];
-            		suppHourVal = LocalTime.parse(h[0], parser);
-            		
+            		String[] str = s.split(" ");
+            		this.AM_PM =" "+str[1];
+            	    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH);
+            	    String input = s;
+            	    suppHourVal= LocalTime.parse(input, inputFormatter);
             	}
             }
     		

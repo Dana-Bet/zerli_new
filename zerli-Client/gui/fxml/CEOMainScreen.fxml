@@ -6,41 +6,41 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="722.0" style="-fx-background-image: url('/images/back8.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.CEOScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="557.0" prefWidth="722.0" style="-fx-background-image: url('/images/back6.JPG');" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.CEOScreenController">
    <children>
-      <Label layoutX="283.0" layoutY="40.0" text="Welcome">
+      <Label layoutX="381.0" layoutY="110.0" text="Welcome">
          <font>
-            <Font name="Yu Gothic Light" size="25.0" />
+            <Font name="Yu Gothic UI Semibold" size="24.0" />
          </font>
       </Label>
-      <Text fx:id="nameText" layoutX="416.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="nameText" layoutX="497.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="176.0">
          <font>
-            <Font name="Yu Gothic Light" size="25.0" />
+            <Font name="Yu Gothic UI Semibold" size="24.0" />
          </font>
       </Text>
-      <Button fx:id="viewOrdersBtn" layoutX="283.0" layoutY="130.0" mnemonicParsing="false" onAction="#ordersReports" opacity="0.76" prefHeight="59.0" prefWidth="239.0" text="View orders reports">
+      <Button fx:id="viewOrdersBtn" layoutX="351.0" layoutY="182.0" mnemonicParsing="false" onAction="#ordersReports" opacity="0.76" prefHeight="40.0" prefWidth="260.0" text="View orders reports">
          <font>
-            <Font name="Yu Gothic Light" size="18.0" />
+            <Font name="Yu Gothic UI Semibold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="viewRevenueBtn" layoutX="280.0" layoutY="219.0" mnemonicParsing="false" onAction="#revenueReports" opacity="0.76" prefHeight="59.0" prefWidth="239.0" text="View revenues reports">
+      <Button fx:id="viewRevenueBtn" layoutX="351.0" layoutY="236.0" mnemonicParsing="false" onAction="#revenueReports" opacity="0.76" prefHeight="40.0" prefWidth="260.0" text="View revenues reports">
          <font>
-            <Font name="Yu Gothic Light" size="18.0" />
+            <Font name="Yu Gothic UI Semibold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="viewRevenueBtn1" layoutX="280.0" layoutY="311.0" mnemonicParsing="false" onAction="#HistogramOrders" opacity="0.76" prefHeight="59.0" prefWidth="239.0" text="View distribution orders">
+      <Button fx:id="viewRevenueBtn1" layoutX="351.0" layoutY="291.0" mnemonicParsing="false" onAction="#HistogramOrders" opacity="0.76" prefHeight="40.0" prefWidth="260.0" text="View distribution orders">
          <font>
-            <Font name="Yu Gothic Light" size="18.0" />
+            <Font name="Yu Gothic UI Semibold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="viewRevenueBtn11" layoutX="280.0" layoutY="396.0" mnemonicParsing="false" onAction="#HistogramComplaints" opacity="0.76" prefHeight="59.0" prefWidth="239.0" text="View distribution complaints">
+      <Button fx:id="viewRevenueBtn11" layoutX="351.0" layoutY="349.0" mnemonicParsing="false" onAction="#HistogramComplaints" opacity="0.76" prefHeight="40.0" prefWidth="260.0" text="View distribution complaints">
          <font>
-            <Font name="Yu Gothic Light" size="17.0" />
+            <Font name="Yu Gothic UI Semibold" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="logoutBtn" layoutX="585.0" layoutY="499.0" mnemonicParsing="false" onAction="#logout" opacity="0.76" prefHeight="31.0" prefWidth="99.0" text="Logout">
+      <Button fx:id="logoutBtn" layoutX="422.0" layoutY="451.0" mnemonicParsing="false" onAction="#logout" opacity="0.76" prefHeight="31.0" prefWidth="99.0" text="Logout">
          <font>
-            <Font name="Yu Gothic Light" size="15.0" />
+            <Font name="Yu Gothic UI Semibold" size="15.0" />
          </font>
       </Button>
    </children>

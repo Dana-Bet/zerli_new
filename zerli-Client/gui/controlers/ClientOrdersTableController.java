@@ -4,11 +4,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import Entities.Message;
 import Entities.MessageType;
@@ -102,7 +105,7 @@ public class ClientOrdersTableController extends AbstractController implements I
         if(order!=null) {
         	update_Selected_Order_Fileds(order);
         	if(Status.equals("canceled")||Status.equals("There is a request to cancel")) {
-            	upLbl.setText("Your order is "+Status);
+            	upLbl.setText("The status of this order doesn't allow this action.");
             	return;
         	}
         	 calc_difference_In_Hours(order);
@@ -110,10 +113,10 @@ public class ClientOrdersTableController extends AbstractController implements I
                 upLbl.setText("Order delivery time has passed.");
                 return;
             }
-            if(difference_In_Hours>0 && difference_In_Hours<=1) {
+            if(difference_In_Hours>0 && difference_In_Hours<1) {
           	    Refund = "Not refund";
             }
-            if(difference_In_Hours>1 && difference_In_Hours<3) {
+            if(difference_In_Hours>=1 && difference_In_Hours<3) {
             	  Refund = "50% refund"; 
             }
             if(difference_In_Hours>=3) {
@@ -160,23 +163,25 @@ public class ClientOrdersTableController extends AbstractController implements I
         
     private void calc_difference_In_Hours(Order order) {
     	
-  
+    
     		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     		LocalDate localDate = LocalDate.parse(SuppDate, formatter1);
 
-    		DateTimeFormatter parser = DateTimeFormatter.ISO_LOCAL_TIME;
-    		LocalTime localTime = LocalTime.parse(SuppTime, parser);
-
+    	    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH);
+    	    String input = SuppTime;
+    	    LocalTime localTime = LocalTime.parse(input, inputFormatter);
+    	    
     		LocalDateTime t =   LocalDateTime.of(localDate, localTime);
     		Timestamp suppTimeOfOrder = Timestamp.valueOf(t);
     		
+    	   	
     		Timestamp currentTime = Timestamp.valueOf(LocalDateTime.now());
     		long difference_In_Time= suppTimeOfOrder.getTime() - currentTime.getTime();
-    		int seconds = (int) difference_In_Time / 1000;
+    		long seconds = difference_In_Time / 1000;
     		long difference= seconds/3600 ;
 
     		this.difference_In_Hours = difference;
-    		this.difference_In_Hours =Math.abs(difference);
+            System.out.println( difference);
 
     }   
     
@@ -184,11 +189,7 @@ public class ClientOrdersTableController extends AbstractController implements I
 
     	OrderTime =order.getOrderTime();
     	SuppDate=order.getSuppDate();
-    	
-
-    	String[] s = order.getSuppTime().split(" ");
-    	SuppTime=s[0];
-    			
+	    SuppTime=order.getSuppTime();
     	Status=order.getStatus();
     	Price =order.getPrice();
     	OrderNumber=order.getOrderNumber();
